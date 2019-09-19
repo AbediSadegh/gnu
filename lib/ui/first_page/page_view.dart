@@ -3,6 +3,9 @@ import 'package:gnu/ui/first_page/reason.dart';
 
 import 'enter_name.dart';
 import 'introduction.dart';
+//import 'package:gnu/widgets/gnu_carousel_slider.dart';
+//import 'package:gnu/widgets/gnu_slider.dart';
+import 'package:gnu/widgets/story_slider.dart';
 
 class FirstPage extends StatefulWidget {
   @override
@@ -26,7 +29,9 @@ class _FirstPageState extends State<FirstPage> {
         controller: controller,
       ),
       NamePage(controller),
+      StorySlider(),
       ReasonPage(controller),
+
     ];
     return Directionality(
       textDirection: TextDirection.rtl,
