@@ -14,7 +14,34 @@ class Introduction extends StatefulWidget {
 
 class _IntroductionState extends State<Introduction> {
   bool isSelected = false;
+  bool isStartFirst = false;
+  bool isStartSecond = false;
+  bool isButtonShow = false;
 
+
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    Timer(Duration(milliseconds: 500),(){
+      setState(() {
+        isStartFirst = true;
+      });
+    });
+    Timer(Duration(milliseconds: 950),(){
+      setState(() {
+        isStartSecond = true;
+      });
+    });
+
+    Timer(Duration(milliseconds: 1250),(){
+      setState(() {
+        isButtonShow = true;
+      });
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,28 +53,33 @@ class _IntroductionState extends State<Introduction> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            Text(
-              "سلام icare هستم",
-              style: TextStyle(fontSize: 28, color: Colors.white),
+            Container(height: MediaQuery.of(context).size.height*.30,),
+            AnimatedOpacity(
+              opacity: isStartFirst ? 1 : 0,
+              curve: Curves.easeInOut,
+              duration: Duration(milliseconds: 700),
+              child: Text(
+                "سلام icare هستم",
+                style: TextStyle(fontSize: 28, color: Colors.white),
+              ),
             ),
-            Text(
-              "یک دستیار شخصی",
-              style: TextStyle(fontSize: 20, color: Colors.white),
+            AnimatedOpacity(
+              opacity: isStartSecond ? 1 : 0,
+              curve: Curves.easeInOut,
+              duration: Duration(milliseconds: 800),
+              child: Text(
+                "یک دستیار شخصی",
+                style: TextStyle(fontSize: 20, color: Colors.white),
+              ),
             ),
             SizedBox(
               height: 100,
             ),
-            GestureDetector(
-              onTap: () {
-                setState(() {
-                  isSelected = true;
-                });
-                Timer(Duration(milliseconds: 550), () {
-                  widget.controller.nextPage(
-                      duration: Duration(milliseconds: 850),
-                      curve: Curves.linear);
-                });
-              },
+            Expanded(child: Container(),),
+            AnimatedOpacity(
+              duration: Duration(milliseconds: 900),
+              opacity: isButtonShow ? 1 : 0,
+              curve: Curves.easeInOut,
               child: RaisedButton(
                 focusColor: Colors.white,
                 splashColor: Colors.white,
@@ -84,6 +116,7 @@ class _IntroductionState extends State<Introduction> {
                 ),
               ),
             ),
+            Container(height: 120,),
           ],
         ),
       ),

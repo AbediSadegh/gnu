@@ -15,7 +15,7 @@ class NamePage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             SizedBox(
-              height: 85,
+              height: 105,
             ),
             Padding(
               padding: const EdgeInsets.all(12.0),
@@ -28,21 +28,27 @@ class NamePage extends StatelessWidget {
                   )),
             ),
             SizedBox(
-              height: 45,
+              height: 65,
             ),
-            SizedBox(
-
-              width: MediaQuery.of(context).size.width*.5,
-              child: TextField(
-                decoration: InputDecoration(
-                    hoverColor: Colors.amber,
-                    focusColor: Colors.amber,
-                    enabledBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white)),
-                    focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white)),
-                    ),
-              ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                SizedBox(width: 0,),
+                SizedBox(
+                  width: MediaQuery.of(context).size.width*.6,
+                  child: TextField(
+                    style: TextStyle(color: Colors.white,fontSize: 16,fontFamily: "IranYekan"),
+                    decoration: InputDecoration(
+                        hoverColor: Colors.amber,
+                        focusColor: Colors.amber,
+                        enabledBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white)),
+                        focusedBorder: UnderlineInputBorder(
+                            borderSide: BorderSide(color: Colors.white)),
+                        ),
+                  ),
+                ),
+              ],
             ),
           ],
         ),
