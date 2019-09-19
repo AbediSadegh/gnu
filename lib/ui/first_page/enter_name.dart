@@ -23,7 +23,7 @@ class NamePage extends StatelessWidget {
                   width: MediaQuery.of(context).size.width * .75,
                   child: Text(
                     "خوش حال شدم از آشناییت. اسمت رو وارد کن",
-                    style: TextStyle(fontSize: 25),
+                    style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),
                     textAlign: TextAlign.start,
                   )),
             ),
