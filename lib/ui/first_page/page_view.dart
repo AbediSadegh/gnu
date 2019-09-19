@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gnu/ui/first_page/reason.dart';
+import 'package:gnu/widgets/carousle.dart';
+import 'package:gnu/widgets/date_page.dart';
 import 'package:gnu/widgets/gnu_slider.dart';
 
 import 'enter_name.dart';
@@ -37,7 +39,9 @@ class _FirstPageState extends State<FirstPage> {
       ),
 //      ReasonPage(controller),
       NamePage(controller:controller),
-//      GnuSlider(),
+      GnuSlider(),
+      DatePage(),
+      Carousel(),
 
     ];
     return Directionality(
