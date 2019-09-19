@@ -26,7 +26,7 @@ class _FirstPageState extends State<FirstPage> {
               width: double.maxFinite,
               height: double.maxFinite,
               decoration: BoxDecoration(
-                gradient: LinearGradient(colors: [],begin: Alignment.topCenter,end: Alignment.bottomCenter)
+                gradient: LinearGradient(colors: [Theme.of(context).primaryColor, Theme.of(context).accentColor],begin: Alignment.topCenter,end: Alignment.bottomCenter)
               ),
             ),
             PageView(
