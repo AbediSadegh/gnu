@@ -1,5 +1,6 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:gnu/ui/first_page/page_view.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -18,7 +19,11 @@ class _HomeState extends State<Home> {
             reverse: false,
             items: <Widget>[
               HomeCard(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.of(context).push(new MaterialPageRoute(builder: (context){
+                    return new FirstPage();
+                  }));
+                },
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
