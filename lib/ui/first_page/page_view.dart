@@ -20,6 +20,12 @@ class _FirstPageState extends State<FirstPage> {
 
   @override
   Widget build(BuildContext context) {
+    List<Widget> list = [
+      Introduction(
+        controller: controller,
+      ),
+      NamePage(controller),
+    ];
     return Directionality(
       textDirection: TextDirection.rtl,
       child: Scaffold(
@@ -29,31 +35,68 @@ class _FirstPageState extends State<FirstPage> {
               width: double.maxFinite,
               height: double.maxFinite,
               decoration: BoxDecoration(
-                gradient: LinearGradient(colors: [Color(0xff8186e4),Color(0xff7a72c7)],begin: Alignment.topCenter,end: Alignment.bottomCenter)
-              ),
+                  gradient: LinearGradient(colors: [
+                Theme.of(context).primaryColor,
+                Theme.of(context).accentColor
+              ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
             ),
             Container(
               width: double.maxFinite,
               height: double.maxFinite,
-
               child: WillPopScope(
-                onWillPop: (){
-                  controller.previousPage(duration: Duration(milliseconds: 250), curve: Curves.linear);
+                onWillPop: () {
+                  controller.previousPage(
+                      duration: Duration(milliseconds: 250),
+                      curve: Curves.linear);
                 },
-                child: PageView(
-//                physics: NeverScrollableScrollPhysics(),
-                  controller: controller,
-                  scrollDirection: Axis.vertical,
+                child: Stack(
                   children: <Widget>[
-                    Introduction(controller: controller,),
-                    Introduction(controller: controller,),
-
+                    PageView(
+//                physics: NeverScrollableScrollPhysics(),
+                      controller: controller,
+                      scrollDirection: Axis.vertical,
+                      children: list,
+                    ),
+                    Container(
+                      alignment: Alignment.bottomRight,
+                      height: double.maxFinite,
+                      width: double.maxFinite,
+                      child: Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: <Widget>[
+                            GestureDetector(
+                                onTap: () {
+                                  if (controller.page > 0)
+                                    controller.previousPage(
+                                        duration: Duration(milliseconds: 950),
+                                        curve: Curves.linear);
+                                },
+                                child: Icon(
+                                  Icons.keyboard_arrow_up,
+                                  size: 42,
+                                )),
+                            GestureDetector(
+                              onTap: () {
+                                if (controller.page < list.length)
+                                  controller.nextPage(
+                                      duration: Duration(milliseconds: 950),
+                                      curve: Curves.linear);
+                              },
+                              child: Icon(
+                                Icons.keyboard_arrow_down,
+                                size: 42,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
             ),
-
-//            Container(width: double.maxFinite,height: double.maxFinite,),
           ],
         ),
       ),

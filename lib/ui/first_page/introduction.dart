@@ -26,8 +26,14 @@ class _IntroductionState extends State<Introduction> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            Text("سلام icare هستم",style: TextStyle(fontSize: 28,color: Colors.white),),
-            Text("یک دستیار شخصی",style: TextStyle(fontSize: 20,color: Colors.white),),
+            Text(
+              "سلام icare هستم",
+              style: TextStyle(fontSize: 28, color: Colors.white),
+            ),
+            Text(
+              "یک دستیار شخصی",
+              style: TextStyle(fontSize: 20, color: Colors.white),
+            ),
             SizedBox(
               height: 100,
             ),
@@ -36,31 +42,44 @@ class _IntroductionState extends State<Introduction> {
                 setState(() {
                   isSelected = true;
                 });
-              Timer(Duration(milliseconds: 550),(){
-                widget.controller.nextPage(duration: Duration(milliseconds: 850), curve: Curves.linear);
-              });
+                Timer(Duration(milliseconds: 550), () {
+                  widget.controller.nextPage(
+                      duration: Duration(milliseconds: 850),
+                      curve: Curves.linear);
+                });
               },
-
-              child: AnimatedContainer(
-                decoration: ShapeDecoration(
-                    color: Colors.white,
-                    shadows: [BoxShadow()],
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(45))),
-                height: !isSelected ? 60 : 35,
-                width:
-                    !isSelected ? MediaQuery.of(context).size.width * .6 : 35,
-                duration: Duration(milliseconds: 500),
-                curve: Curves.linear,
-                child: Center(
-                  child: AnimatedOpacity(
-                    opacity: isSelected ? 0.0 : 1.0,
-                    duration: Duration(milliseconds: 500),
-                    child: Text(
-                      "ادامه",
-                      style: TextStyle(fontSize: 20, color: Colors.black),
+              child: RaisedButton(
+                focusColor: Colors.white,
+                splashColor: Colors.white,
+                color: Colors.white,
+                hoverColor: Colors.white,
+                highlightColor: Colors.white,
+                disabledColor: Colors.white,
+                elevation: 2,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(45)),
+                onPressed: () {
+                  widget.controller.nextPage(
+                      duration: Duration(milliseconds: 550),
+                      curve: Curves.linear);
+                },
+                child: Padding(
+                  padding: const EdgeInsets.all(2.0),
+                  child: Container(
+                    decoration: ShapeDecoration(
+                        color: Colors.white,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15))),
+                    width: MediaQuery.of(context).size.width * .6,
+                    height: 55,
+                    child: Center(
+                      child: Text(
+                        "سلام",
+                        style: TextStyle(
+                            color: Theme.of(context).primaryColor,
+                            fontSize: 20),
+                      ),
                     ),
-                    curve: Curves.linear,
                   ),
                 ),
               ),

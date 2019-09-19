@@ -16,26 +16,33 @@ class _AnimationContainerState extends State<AnimationContainer> {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){
-        setState(() {
-          isSelected = true;
-        });
-        widget.function();
-      },
+      onTap: (){},
       child: AnimatedContainer(
         decoration: ShapeDecoration(
             color: Colors.white,
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(5))),
-        height: !isSelected ? 25 : 15,
-        width: !isSelected ? 150 : 15,
-        duration: Duration(milliseconds: 250),
+            shadows: [
+              BoxShadow(
+                  color: Colors.black.withOpacity(.2),
+                  spreadRadius: .2,
+                  offset: Offset(0, 5),
+                  blurRadius: 2.5)
+            ],
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(45))),
+        height: !isSelected ? 60 : 45,
+        width:
+        !isSelected ? MediaQuery.of(context).size.width * .6 : MediaQuery.of(context).size.width *.4,
+        duration: Duration(milliseconds: 500),
         curve: Curves.linear,
         child: Center(
           child: AnimatedOpacity(
             opacity: isSelected ? 0.0 : 1.0,
-            duration: Duration(milliseconds: 150),
-            child: Text(widget.text,style: TextStyle(fontSize: 20,color: Colors.black),),
+            duration: Duration(milliseconds: 500),
+            child: Text(
+              "ادامه",
+              style: TextStyle(
+                  fontSize: 20, color: Theme.of(context).primaryColor),
+            ),
             curve: Curves.linear,
           ),
         ),
