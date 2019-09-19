@@ -30,14 +30,21 @@ class _GnuSliderState extends State<GnuSlider> {
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.center,
+      mainAxisAlignment: MainAxisAlignment.start,
       children: <Widget>[
-        new Text(
-          'امروزت چطور بود؟',
-          style: TextStyle(fontSize: 25.0),
+        SizedBox(height: 85,),
+        Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+            SizedBox(width: 15,),
+  Container(width: 0,), Text(
+              'روزت چطور بود؟',
+              style: TextStyle(fontSize: 25.0),
+            ),
+          ],
         ),
         new SizedBox(
-          height: MediaQuery.of(context).size.height * 0.15,
+          height: MediaQuery.of(context).size.height * 0.25,
         ),
         new Icon(icons[_slider.toInt()]),
         new SizedBox(

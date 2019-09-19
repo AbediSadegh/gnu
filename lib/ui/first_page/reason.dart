@@ -67,7 +67,7 @@ class ReasonPage extends StatelessWidget {
                     CreateColumn(
                         FontAwesomeIcons.running, () {}, "ورزش", controller),
                     CreateColumn(
-                        FontAwesomeIcons.memory, () {}, "خاطرات", controller),
+                        FontAwesomeIcons.memory, () {}, "فعالیت ها", controller),
                   ],
                 ),
               ],

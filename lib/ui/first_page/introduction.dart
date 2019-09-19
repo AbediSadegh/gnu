@@ -77,13 +77,21 @@ class _IntroductionState extends State<Introduction> {
               opacity: isStartSecond ? 1 : 0,
               curve: Curves.easeInOut,
               duration: Duration(milliseconds: 800),
-              child: Text(
-                "یک دستیار شخصی",
-                style: TextStyle(fontSize: 20, color: Colors.white),
+              child: Column(
+                children: <Widget>[
+                  Text(
+                    "دستیار جدید",
+                    style: TextStyle(fontSize: 20, color: Colors.white),
+                  ),
+                  Text(
+                    "شخصی شما",
+                    style: TextStyle(fontSize: 20, color: Colors.white),
+                  ),
+                ],
               ),
             ),
             SizedBox(
-              height: 100,
+              height: 80,
             ),
             Expanded(child: Container(),),
             AnimatedOpacity(

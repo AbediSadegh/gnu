@@ -31,13 +31,12 @@ class _FirstPageState extends State<FirstPage> {
         controller: controller,
         onTap: (){
           setState(() {
-            isFirstPage = false;
-          });
+            isFirstPage = false;});
         },
       ),
 //      ReasonPage(controller),
       NamePage(controller:controller),
-//      GnuSlider(),
+      GnuSlider(),
 
     ];
     return Directionality(
@@ -70,12 +69,15 @@ class _FirstPageState extends State<FirstPage> {
               height: double.maxFinite,
               child: WillPopScope(
                 onWillPop: () {
+
                   controller.previousPage(
                       duration: Duration(milliseconds: 250),
                       curve: Curves.linear);
-                  setState(() {
-                    isFirstPage =true;
-                  });
+                  if(controller.page == 1.0){
+                    setState(() {
+                      isFirstPage =true;
+                    });
+                  }
 
 
                 },

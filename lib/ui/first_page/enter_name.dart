@@ -114,8 +114,9 @@ class _NamePageState extends State<NamePage> {
                 GestureDetector(
                   onTap: (){
                     _saveName(textEditingController.text);
-                    Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(builder: (context) => HomePage()));
+//                    Navigator.of(context).pushReplacement(
+//                        MaterialPageRoute(builder: (context) => HomePage()));
+                  widget.controller.nextPage(duration: Duration(milliseconds: 550), curve: Curves.linear);
                   },
                   child: Container(
                     height: 55,
