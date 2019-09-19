@@ -7,6 +7,7 @@ class Launcher extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primaryColor: Color(0xff8186e4),
         accentColor: Color(0xff7a72c7),
