@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:gnu/ui/home_page.dart';
 
 class GnuSlider extends StatefulWidget {
   final ValueChanged<int> onChange;
@@ -14,16 +15,16 @@ class _GnuSliderState extends State<GnuSlider> {
   double _slider = 2;
 
   List<String> moods = [
-    'خیلی بد',
-    'ناراحت کننده',
-    'فوق العاده',
-    'عجیب بود',
+    'خیلی بد بود',
+    'تقریبا بد بود',
+    'خوب تقریبا',
+    'خیلی خوب بود',
   ];
   List<IconData> icons = [
     FontAwesomeIcons.angry,
     FontAwesomeIcons.frown,
+    FontAwesomeIcons.meh,
     FontAwesomeIcons.smile,
-    FontAwesomeIcons.meh
   ];
 
   @override
@@ -47,48 +48,79 @@ class _GnuSliderState extends State<GnuSlider> {
           height: MediaQuery.of(context).size.height * 0.25,
         ),
         new Icon(icons[_slider.toInt()]),
-        new SizedBox(
-          width: MediaQuery.of(context).size.width * 0.7,
-          child: Slider(
-            value: _slider.toDouble(),
-            onChanged: (r) {
-              if (widget.onChange != null) widget.onChange(r.toInt());
-              setState(() {
-                _slider = r;
-                print(_slider);
-              });
-            },
-            onChangeEnd: (i) {
-              setState(() {
-                _slider = _slider.toInt().toDouble();
-              });
-            },
+        Directionality(
+          textDirection: TextDirection.ltr,
+          child: new SizedBox(
+            width: MediaQuery.of(context).size.width * 0.9,
+            child: Slider(
+              value: _slider.toDouble(),
+              onChanged: (r) {
+                if (widget.onChange != null) widget.onChange(r.toInt());
+                setState(() {
+                  _slider = r;
+                  print(_slider);
+                });
+              },
+              onChangeEnd: (i) {
+                setState(() {
+                  _slider = _slider.toInt().toDouble();
+                });
+              },
 //          divisions: 4,
-            min: 0,
-            max: 3,
-            activeColor: Colors.white,
+              min: 0,
+              max: 3,
+              activeColor: Colors.white,
+            ),
           ),
         ),
         Center(
-          child: new Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              Expanded(
-                flex:4,
-                child: Container(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal:40.0),
+            child: new Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Container(
                   alignment: Alignment.center,
                   child: new Text('روزت رو بسنج'),
 //                  width: MediaQuery.of(context).size.width * 0.6,
                 ),
-              ),
-              Expanded(
-                flex:3,
-                child: new Text(moods[_slider.toInt()]),
-              ),
-            ],
+                new Text(moods[_slider.toInt()]),
+              ],
+            ),
           ),
         ),
+        Expanded(child: Container(),),
+        GestureDetector(
+          onTap: (){
+//            _saveName(textEditingController.text);
+                    Navigator.of(context).pushReplacement(
+                        MaterialPageRoute(builder: (context) => HomePage()));
+//            widget.controller.nextPage(duration: Duration(milliseconds: 550), curve: Curves.linear);
+          },
+          child: Container(
+            height: 55,
+            child: Opacity(
+                opacity: 1,
+                child: Container(
+                  child: Center(
+                    child: Text(
+                      "ادامه دادن",
+                      style: TextStyle(color: Theme.of(context).primaryColor,fontSize: 20),
+                    ),
+                  ),
+                  width: MediaQuery.of(context).size.width * .6,
+                  height: 55,
+                  decoration: ShapeDecoration(
+                      color: Colors.white,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(45))),
+                ),
+//                duration: Duration(milliseconds: 600)
+                ),
+          ),
+        ),
+        SizedBox(height: 30,),
       ],
     );
   }
