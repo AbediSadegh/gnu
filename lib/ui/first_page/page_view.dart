@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:gnu/widgets/gnu_carousel_slider.dart';
+//import 'package:gnu/widgets/gnu_carousel_slider.dart';
+//import 'package:gnu/widgets/gnu_slider.dart';
+import 'package:gnu/widgets/story_slider.dart';
 
 class FirstPage extends StatefulWidget {
   @override
@@ -27,15 +29,22 @@ class _FirstPageState extends State<FirstPage> {
               width: double.maxFinite,
               height: double.maxFinite,
               decoration: BoxDecoration(
-                gradient: LinearGradient(colors: [Theme.of(context).primaryColor, Theme.of(context).accentColor],begin: Alignment.topCenter,end: Alignment.bottomCenter)
-              ),
+                  gradient: LinearGradient(colors: [
+                Theme.of(context).primaryColor,
+                Theme.of(context).accentColor
+              ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
             ),
             PageView(
               physics: NeverScrollableScrollPhysics(),
               controller: controller,
               scrollDirection: Axis.vertical,
               children: <Widget>[
-                GnuCarouselSlider(),
+                Container(
+                  alignment: Alignment.center,
+//                  child: GnuCarouselSlider(),
+                    child:StorySlider(),
+                ),
+//              GnuSlider(),
               ],
             ),
           ],

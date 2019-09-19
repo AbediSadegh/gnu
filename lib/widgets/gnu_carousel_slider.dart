@@ -12,12 +12,14 @@ class GnuCarouselSlider extends StatefulWidget {
 }
 
 class _GnuCarouselSliderState extends State<GnuCarouselSlider> {
+
   @override
   Widget build(BuildContext context) {
     return CarouselSlider(
       onPageChanged: (r) {
         if (widget.onChange != null) widget.onChange(r.toInt());
       },
+      aspectRatio: 2.0,
       viewportFraction: 0.3,
       enableInfiniteScroll: false,
       enlargeCenterPage: true,
