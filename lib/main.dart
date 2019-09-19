@@ -12,7 +12,7 @@ class Launcher extends StatelessWidget {
         primaryColor: Color(0xff8186e4),
         accentColor: Color(0xff7a72c7),
         sliderTheme: SliderThemeData(inactiveTrackColor: Color(0xff77777744)),
-        fontFamily: "IranYekan",
+        fontFamily: "Iranyekan",
         textTheme: TextTheme(
           title: TextStyle(color: Color(0xff7a72c7)),
           body1: TextStyle(

@@ -49,6 +49,11 @@ class _GnuSliderState extends State<GnuSlider> {
                 print(_slider);
               });
             },
+            onChangeEnd: (i){
+              setState(() {
+                _slider = _slider.toInt().toDouble();
+              });
+            },
 //          divisions: 4,
             min: 0,
             max: 3,

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:gnu/ui/first_page/reason.dart';
+import 'package:gnu/widgets/gnu_slider.dart';
 
 import 'enter_name.dart';
 import 'introduction.dart';
@@ -14,7 +16,7 @@ class FirstPage extends StatefulWidget {
 
 class _FirstPageState extends State<FirstPage> {
   PageController controller;
-
+  bool isFirstPage = true;
   @override
   void initState() {
     // TODO: implement initState
@@ -27,10 +29,15 @@ class _FirstPageState extends State<FirstPage> {
     List<Widget> list = [
       Introduction(
         controller: controller,
+        onTap: (){
+          setState(() {
+            isFirstPage = false;
+          });
+        },
       ),
-      NamePage(controller),
-      StorySlider(),
-      ReasonPage(controller),
+//      ReasonPage(controller),
+      NamePage(controller:controller),
+//      GnuSlider(),
 
     ];
     return Directionality(
@@ -47,6 +54,13 @@ class _FirstPageState extends State<FirstPage> {
                 Theme.of(context).accentColor
               ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
             ),
+            AnimatedContainer(
+              height: MediaQuery.of(context).size.height*.3,
+              duration: Duration(milliseconds: 1200),
+              child: SvgPicture.asset("asset/iconfinder-icon.svg",width: 85,height: 85,),
+              alignment:isFirstPage ?  Alignment.bottomCenter : Alignment.topLeft,
+              curve: Curves.linear,
+            ),
             Container(
               width: double.maxFinite,
               height: double.maxFinite,
@@ -59,47 +73,47 @@ class _FirstPageState extends State<FirstPage> {
                 child: Stack(
                   children: <Widget>[
                     PageView(
-//                physics: NeverScrollableScrollPhysics(),
+                physics: NeverScrollableScrollPhysics(),
                       controller: controller,
                       scrollDirection: Axis.vertical,
                       children: list,
                     ),
-                    Container(
-                      alignment: Alignment.bottomRight,
-                      height: double.maxFinite,
-                      width: double.maxFinite,
-                      child: Padding(
-                        padding: const EdgeInsets.all(12.0),
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: <Widget>[
-                            GestureDetector(
-                                onTap: () {
-                                  if (controller.page > 0)
-                                    controller.previousPage(
-                                        duration: Duration(milliseconds: 950),
-                                        curve: Curves.linear);
-                                },
-                                child: Icon(
-                                  Icons.keyboard_arrow_up,
-                                  size: 42,
-                                )),
-                            GestureDetector(
-                              onTap: () {
-                                if (controller.page < list.length)
-                                  controller.nextPage(
-                                      duration: Duration(milliseconds: 950),
-                                      curve: Curves.linear);
-                              },
-                              child: Icon(
-                                Icons.keyboard_arrow_down,
-                                size: 42,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
+//                    Container(
+//                      alignment: Alignment.bottomRight,
+//                      height: double.maxFinite,
+//                      width: double.maxFinite,
+//                      child: Padding(
+//                        padding: const EdgeInsets.all(12.0),
+//                        child: Column(
+//                          mainAxisAlignment: MainAxisAlignment.end,
+//                          children: <Widget>[
+//                            GestureDetector(
+//                                onTap: () {
+//                                  if (controller.page > 0)
+//                                    controller.previousPage(
+//                                        duration: Duration(milliseconds: 950),
+//                                        curve: Curves.linear);
+//                                },
+//                                child: Icon(
+//                                  Icons.keyboard_arrow_up,
+//                                  size: 42,
+//                                )),
+//                            GestureDetector(
+//                              onTap: () {
+//                                if (controller.page < list.length)
+//                                  controller.nextPage(
+//                                      duration: Duration(milliseconds: 950),
+//                                      curve: Curves.linear);
+//                              },
+//                              child: Icon(
+//                                Icons.keyboard_arrow_down,
+//                                size: 42,
+//                              ),
+//                            ),
+//                          ],
+//                        ),
+//                      ),
+//                    ),
                   ],
                 ),
               ),

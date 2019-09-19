@@ -5,8 +5,9 @@ import 'package:gnu/widgets/animated_button.dart';
 
 class Introduction extends StatefulWidget {
   PageController controller;
+  final onTap;
 
-  Introduction({this.controller});
+  Introduction({this.controller,this.onTap});
 
   @override
   _IntroductionState createState() => _IntroductionState();
@@ -53,16 +54,25 @@ class _IntroductionState extends State<Introduction> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            Container(height: MediaQuery.of(context).size.height*.30,),
+            Container(height: MediaQuery.of(context).size.height*.35,),
             AnimatedOpacity(
               opacity: isStartFirst ? 1 : 0,
               curve: Curves.easeInOut,
               duration: Duration(milliseconds: 700),
-              child: Text(
-                "سلام icare هستم",
-                style: TextStyle(fontSize: 28, color: Colors.white),
+              child: Column(
+                children: <Widget>[
+                  Text(
+                    "سلام عزیزم،",
+                    style: TextStyle(fontSize: 28, color: Colors.white,fontWeight: FontWeight.bold,fontFamily: "Iranyekan"),
+                  ),
+                  Text(
+                    "من iCare هستم",
+                    style: TextStyle(fontSize: 28, color: Colors.white,fontWeight: FontWeight.bold),
+                  ),
+                ],
               ),
             ),
+            SizedBox(height: 15,),
             AnimatedOpacity(
               opacity: isStartSecond ? 1 : 0,
               curve: Curves.easeInOut,
@@ -91,6 +101,7 @@ class _IntroductionState extends State<Introduction> {
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(45)),
                 onPressed: () {
+                  widget.onTap();
                   widget.controller.nextPage(
                       duration: Duration(milliseconds: 550),
                       curve: Curves.linear);
