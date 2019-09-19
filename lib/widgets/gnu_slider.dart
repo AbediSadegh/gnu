@@ -3,7 +3,9 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class GnuSlider extends StatefulWidget {
   final ValueChanged<int> onChange;
+
   GnuSlider({this.onChange});
+
   @override
   _GnuSliderState createState() => _GnuSliderState();
 }
@@ -37,10 +39,11 @@ class _GnuSliderState extends State<GnuSlider> {
           ],
         ),
         SizedBox(
-          width: MediaQuery.of(context).size.width*0.7,
+          width: MediaQuery.of(context).size.width * 0.7,
           child: Slider(
             value: _slider.toDouble(),
             onChanged: (r) {
+              if (widget.onChange != null) widget.onChange(r.toInt());
               setState(() {
                 _slider = r;
                 print(_slider);

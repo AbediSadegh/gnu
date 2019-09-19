@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gnu/widgets/gnu_slider.dart';
+import 'package:gnu/widgets/gnu_carousel_slider.dart';
 
 class FirstPage extends StatefulWidget {
   @override
@@ -35,7 +35,7 @@ class _FirstPageState extends State<FirstPage> {
               controller: controller,
               scrollDirection: Axis.vertical,
               children: <Widget>[
-                GnuSlider(onChange: (val){},),
+                GnuCarouselSlider(),
               ],
             ),
           ],
