@@ -11,34 +11,36 @@ class GnuSlider extends StatefulWidget {
 }
 
 class _GnuSliderState extends State<GnuSlider> {
-  double _slider = 1;
+  double _slider = 2;
+
+  List<String> moods = [
+    'خیلی بد',
+    'ناراحت کننده',
+    'فوق العاده',
+    'عجیب بود',
+  ];
+  List<IconData> icons = [
+    FontAwesomeIcons.angry,
+    FontAwesomeIcons.frown,
+    FontAwesomeIcons.smile,
+    FontAwesomeIcons.meh
+  ];
 
   @override
   Widget build(BuildContext context) {
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        Stack(
-          children: <Widget>[
-            Visibility(
-              visible: _slider.toInt() == 0 ? true : false,
-              child: Icon(FontAwesomeIcons.angry),
-            ),
-            Visibility(
-              visible: _slider.toInt() == 1 ? true : false,
-              child: Icon(FontAwesomeIcons.frown),
-            ),
-            Visibility(
-              visible: _slider.toInt() == 2 ? true : false,
-              child: Icon(FontAwesomeIcons.smile),
-            ),
-            Visibility(
-              visible: _slider.toInt() == 3 ? true : false,
-              child: Icon(FontAwesomeIcons.meh),
-            ),
-          ],
+        new Text(
+          'امروزت چطور بود؟',
+          style: TextStyle(fontSize: 25.0),
         ),
-        SizedBox(
+        new SizedBox(
+          height: MediaQuery.of(context).size.height * 0.15,
+        ),
+        new Icon(icons[_slider.toInt()]),
+        new SizedBox(
           width: MediaQuery.of(context).size.width * 0.7,
           child: Slider(
             value: _slider.toDouble(),
@@ -49,12 +51,37 @@ class _GnuSliderState extends State<GnuSlider> {
                 print(_slider);
               });
             },
+            onChangeEnd: (i) {
+              setState(() {
+                _slider = _slider.toInt().toDouble();
+              });
+            },
 //          divisions: 4,
             min: 0,
             max: 3,
             activeColor: Colors.white,
           ),
-        )
+        ),
+        Center(
+          child: new Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Expanded(
+                flex:4,
+                child: Container(
+                  alignment: Alignment.center,
+                  child: new Text('روزت رو بسنج'),
+//                  width: MediaQuery.of(context).size.width * 0.6,
+                ),
+              ),
+              Expanded(
+                flex:3,
+                child: new Text(moods[_slider.toInt()]),
+              ),
+            ],
+          ),
+        ),
       ],
     );
   }
