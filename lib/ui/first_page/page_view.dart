@@ -54,12 +54,16 @@ class _FirstPageState extends State<FirstPage> {
                 Theme.of(context).accentColor
               ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
             ),
-            AnimatedContainer(
-              height: MediaQuery.of(context).size.height*.3,
-              duration: Duration(milliseconds: 1200),
-              child: SvgPicture.asset("asset/iconfinder-icon.svg",width: 85,height: 85,),
-              alignment:isFirstPage ?  Alignment.bottomCenter : Alignment.topLeft,
-              curve: Curves.linear,
+            Padding(
+              padding: const EdgeInsets.only(top:18.0,left: 0),
+              child: AnimatedContainer(
+                padding: EdgeInsets.only(left: isFirstPage ? 0 : 15,top: 12),
+                height: MediaQuery.of(context).size.height*.3,
+                duration: Duration(milliseconds: 900),
+                child: SvgPicture.asset("asset/iconfinder-icon.svg",width: 85,height: 85,),
+                alignment:isFirstPage ?  Alignment.bottomCenter : Alignment.topLeft,
+                curve: Curves.linear,
+              ),
             ),
             Container(
               width: double.maxFinite,
@@ -69,6 +73,11 @@ class _FirstPageState extends State<FirstPage> {
                   controller.previousPage(
                       duration: Duration(milliseconds: 250),
                       curve: Curves.linear);
+                  setState(() {
+                    isFirstPage =true;
+                  });
+
+
                 },
                 child: Stack(
                   children: <Widget>[

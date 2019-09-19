@@ -93,9 +93,12 @@ class _NamePageState extends State<NamePage> {
                     decoration: InputDecoration(
                       hintText: "نام مستعار",
                       hintStyle: TextStyle(fontSize: 25, color: Colors.white.withOpacity(.5)),
-                      enabledBorder: InputBorder.none,
-
-                      focusedBorder: InputBorder.none,
+//                      enabledBorder: InputBorder.none,
+                      enabledBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: Colors.white)),
+                      focusedBorder: UnderlineInputBorder(
+                          borderSide: BorderSide(color: Colors.white.withOpacity(.3))),
+//                      focusedBorder: InputBorder.none,
                     ),
                   ),
                 ),
