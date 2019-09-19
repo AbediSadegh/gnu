@@ -10,6 +10,7 @@ class Launcher extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Color(0xff8186e4),
         accentColor: Color(0xff7a72c7),
+        fontFamily: "IranYekan",
         textTheme: TextTheme(
           body1: TextStyle(color: Color(0xffdfe5ee)),
         ),
