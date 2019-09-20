@@ -101,6 +101,9 @@ class _HomeState extends State<Home> {
                       height: 10,
                     ),
                     BarChartSample1(),
+                    SizedBox(
+                      height: 10,
+                    ),
                     ClipRRect(
                       borderRadius: BorderRadius.circular(16),
                       child: Image.network(
@@ -821,7 +824,7 @@ class BarChartSample1State extends State<BarChartSample1> {
       aspectRatio: 1,
       child: Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
-        color: Color(0xff81e5cd),
+        color: Colors.purple[200],
         child: Padding(
           padding: const EdgeInsets.all(16),
           child: Column(
@@ -844,7 +847,7 @@ class BarChartSample1State extends State<BarChartSample1> {
                 "در هفته چقدر خوابیده اید.",
                 textDirection: TextDirection.rtl,
                 style: TextStyle(
-                    color: Color(0xff379982),
+                    color: Colors.black45,
                     fontSize: 18,
                     fontWeight: FontWeight.bold),
               ),
