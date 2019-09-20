@@ -31,7 +31,6 @@ dependencies:
   flutter_svg: ^0.14.1
   datetime_picker_formfield: ^0.4.3
   hidden_drawer_menu: ^1.1.2
-  intl: ^0.16.0
 
 dev_dependencies:
   flutter_test:
