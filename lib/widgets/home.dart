@@ -101,11 +101,15 @@ class _HomeState extends State<Home> {
                       height: 10,
                     ),
                     BarChartSample1(),
-                    Container(height: 15,),
-                    Container(child: ClipRRect(
-                        borderRadius: BorderRadius.circular(15),
-                        child: Image(image: AssetImage("asset/photo-4.jpg"),))),
-                    Container(height: 15,),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(16),
+                      child: Image.network(
+                        'https://bucket-15.digicloud-oss.com/digikala-adservice-banners/1000010166.jpg',
+                      ),
+                    )
                   ],
                 ),
               )
@@ -602,11 +606,11 @@ class PieChart2State extends State {
             final TextStyle style = showingSections[touchedIndex].titleStyle;
             showingSections[touchedIndex] =
                 showingSections[touchedIndex].copyWith(
-                  titleStyle: style.copyWith(
-                    fontSize: 24,
-                  ),
-                  radius: 60,
-                );
+              titleStyle: style.copyWith(
+                fontSize: 24,
+              ),
+              radius: 60,
+            );
           }
         }
       });
@@ -633,7 +637,7 @@ class PieChart2State extends State {
                     PieChartData(
                         pieTouchData: PieTouchData(
                             touchResponseStreamSink:
-                            pieTouchedResultStreamController.sink),
+                                pieTouchedResultStreamController.sink),
                         borderData: FlBorderData(
                           show: false,
                         ),
@@ -804,10 +808,10 @@ class BarChartSample1State extends State<BarChartSample1> {
           if (touchedGroupIndex != -1) {
             showingBarGroups[touchedGroupIndex] =
                 showingBarGroups[touchedGroupIndex].copyWith(
-                  barRods: showingBarGroups[touchedGroupIndex].barRods.map((rod) {
-                    return rod.copyWith(color: Colors.yellow, y: rod.y + 1);
-                  }).toList(),
-                );
+              barRods: showingBarGroups[touchedGroupIndex].barRods.map((rod) {
+                return rod.copyWith(color: Colors.yellow, y: rod.y + 1);
+              }).toList(),
+            );
           }
         }
       });
@@ -820,7 +824,7 @@ class BarChartSample1State extends State<BarChartSample1> {
       aspectRatio: 1,
       child: Card(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
-        color: Color(0xff81e5cd),
+        color: Colors.purple[200],
         child: Padding(
           padding: const EdgeInsets.all(16),
           child: Column(
@@ -843,7 +847,7 @@ class BarChartSample1State extends State<BarChartSample1> {
                 "در هفته چقدر خوابیده اید.",
                 textDirection: TextDirection.rtl,
                 style: TextStyle(
-                    color: Color(0xff379982),
+                    color: Colors.black45,
                     fontSize: 18,
                     fontWeight: FontWeight.bold),
               ),
@@ -892,7 +896,7 @@ class BarChartSample1State extends State<BarChartSample1> {
                               }).toList();
                             }),
                         touchResponseSink:
-                        barTouchedResultStreamController.sink,
+                            barTouchedResultStreamController.sink,
                       ),
                       titlesData: FlTitlesData(
                         show: true,

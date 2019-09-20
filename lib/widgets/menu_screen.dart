@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gnu/ui/advertise.dart';
+import 'package:provider/provider.dart';
+
+import '../main.dart';
 
 class MenuScreen extends StatelessWidget{
 
@@ -36,7 +39,7 @@ class MenuScreen extends StatelessWidget{
 //                  NetworkImage(imageUrl),
 //                ),
 //              ),
-              Text('Mahdi',
+              Text(Provider.of<Name>(context).name,
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 20,

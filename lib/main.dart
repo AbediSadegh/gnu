@@ -13,8 +13,8 @@ class Launcher extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        Provider<Story>(
-          builder: (_) => Story(),
+        Provider<Name>(
+          builder: (_)=>Name(),
         )
       ],
       child: MaterialApp(
@@ -38,3 +38,6 @@ class Launcher extends StatelessWidget {
   }
 }
 
+class Name{
+  String name;
+}

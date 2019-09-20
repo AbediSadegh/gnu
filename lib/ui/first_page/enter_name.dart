@@ -1,8 +1,10 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../main.dart';
 import '../home_page.dart';
 
 class NamePage extends StatefulWidget {
@@ -54,12 +56,14 @@ class _NamePageState extends State<NamePage> {
                       children: <Widget>[
                         Text(
                           "از آشناییت خوشحالم،",
-                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                          style: TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.bold),
                           textAlign: TextAlign.start,
                         ),
                         Text(
                           "میتونی بهم بگی دوستات چی صدات میکنن؟",
-                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                          style: TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.bold),
                           textAlign: TextAlign.start,
                         ),
                       ],
@@ -90,13 +94,15 @@ class _NamePageState extends State<NamePage> {
                           fontSize: 16,
                           fontFamily: "IranYekan"),
                       decoration: InputDecoration(
-                        hintText: "نام مستعار",
-                        hintStyle: TextStyle(fontSize: 25, color: Colors.white.withOpacity(.5)),
+                        hintText: "نام",
+                        hintStyle: TextStyle(
+                            fontSize: 25, color: Colors.white.withOpacity(.5)),
 //                      enabledBorder: InputBorder.none,
                         enabledBorder: UnderlineInputBorder(
                             borderSide: BorderSide(color: Colors.white)),
                         focusedBorder: UnderlineInputBorder(
-                            borderSide: BorderSide(color: Colors.white.withOpacity(.3))),
+                            borderSide: BorderSide(
+                                color: Colors.white.withOpacity(.3))),
 //                      focusedBorder: InputBorder.none,
                       ),
                     ),
@@ -109,10 +115,17 @@ class _NamePageState extends State<NamePage> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Container(width: 0,),
-                  GestureDetector(
-                    onTap: (){
+                  Container(
+                    width: 0,
+                  ),
+                  RaisedButton(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(45)),
+                    padding: EdgeInsets.all(0.0),
+                    onPressed: () {
                       _saveName(textEditingController.text);
+                      if(textEditingController.text.isNotEmpty)
+                        Provider.of<Name>(context).name=  textEditingController.text;
                       Navigator.of(context).pushReplacement(
                           MaterialPageRoute(builder: (context) => HomePage()));
 //                  widget.controller.nextPage(duration: Duration(milliseconds: 550), curve: Curves.linear);
@@ -125,7 +138,9 @@ class _NamePageState extends State<NamePage> {
                             child: Center(
                               child: Text(
                                 "ادامه دادن",
-                                style: TextStyle(color: Theme.of(context).primaryColor,fontSize: 20),
+                                style: TextStyle(
+                                    color: Theme.of(context).primaryColor,
+                                    fontSize: 20),
                               ),
                             ),
                             width: MediaQuery.of(context).size.width * .6,
@@ -140,7 +155,9 @@ class _NamePageState extends State<NamePage> {
                   ),
                 ],
               ),
-              SizedBox(height: MediaQuery.of(context).size.height*.1,)
+              SizedBox(
+                height: MediaQuery.of(context).size.height * .1,
+              )
             ],
           ),
         ),

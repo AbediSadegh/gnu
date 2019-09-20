@@ -26,7 +26,7 @@ class ReasonPage extends StatelessWidget {
             child: Container(
               width: MediaQuery.of(context).size.width * .75,
               child: Text(
-                "هووم چی باعت شده روزت $mood ",
+                "هووم - چی باعت شده روزت $mood ",
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 textAlign: TextAlign.justify,
               ),
@@ -87,14 +87,22 @@ class ReasonPage extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              FlatButton(
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(45))),
+              RaisedButton(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(45))),
                 color: Colors.white,
                 child: Container(
-                    width: MediaQuery.of(context).size.width *0.5,
-                    child: Center(child: Text("ادامه",style: TextStyle(color: Theme.of(context).primaryColor),))),
-                onPressed: (){
-                  controller.nextPage(duration: Duration(milliseconds: 500), curve: Curves.linear);
+                    width: MediaQuery.of(context).size.width * 0.6,
+                    height: 55.0,
+                    child: Center(
+                        child: Text(
+                      "ادامه",
+                      style: TextStyle(color: Theme.of(context).primaryColor),
+                    ))),
+                onPressed: () {
+                  controller.nextPage(
+                      duration: Duration(milliseconds: 500),
+                      curve: Curves.linear);
                 },
               ),
             ],
@@ -144,12 +152,12 @@ class _CreateColumnState extends State<CreateColumn> {
 
     return GestureDetector(
       onTap: () {
-        if(isSelected){
+        if (isSelected) {
           setState(() {
             isSelected = false;
 //          Provider.of<Story>(context).category = widget.number;
           });
-        }else {
+        } else {
           setState(() {
             isSelected = true;
 //          Provider.of<Story>(context).category = widget.number;
