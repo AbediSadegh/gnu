@@ -100,7 +100,13 @@ class _HomeState extends State<Home> {
                     SizedBox(
                       height: 10,
                     ),
-                    BarChartSample1()
+                    BarChartSample1(),
+                    ClipRRect(
+                      borderRadius: BorderRadius.circular(16),
+                      child: Image.network(
+                        'https://bucket-15.digicloud-oss.com/digikala-adservice-banners/1000010166.jpg',
+                      ),
+                    )
                   ],
                 ),
               )
@@ -597,11 +603,11 @@ class PieChart2State extends State {
             final TextStyle style = showingSections[touchedIndex].titleStyle;
             showingSections[touchedIndex] =
                 showingSections[touchedIndex].copyWith(
-                  titleStyle: style.copyWith(
-                    fontSize: 24,
-                  ),
-                  radius: 60,
-                );
+              titleStyle: style.copyWith(
+                fontSize: 24,
+              ),
+              radius: 60,
+            );
           }
         }
       });
@@ -628,7 +634,7 @@ class PieChart2State extends State {
                     PieChartData(
                         pieTouchData: PieTouchData(
                             touchResponseStreamSink:
-                            pieTouchedResultStreamController.sink),
+                                pieTouchedResultStreamController.sink),
                         borderData: FlBorderData(
                           show: false,
                         ),
@@ -799,10 +805,10 @@ class BarChartSample1State extends State<BarChartSample1> {
           if (touchedGroupIndex != -1) {
             showingBarGroups[touchedGroupIndex] =
                 showingBarGroups[touchedGroupIndex].copyWith(
-                  barRods: showingBarGroups[touchedGroupIndex].barRods.map((rod) {
-                    return rod.copyWith(color: Colors.yellow, y: rod.y + 1);
-                  }).toList(),
-                );
+              barRods: showingBarGroups[touchedGroupIndex].barRods.map((rod) {
+                return rod.copyWith(color: Colors.yellow, y: rod.y + 1);
+              }).toList(),
+            );
           }
         }
       });
@@ -887,7 +893,7 @@ class BarChartSample1State extends State<BarChartSample1> {
                               }).toList();
                             }),
                         touchResponseSink:
-                        barTouchedResultStreamController.sink,
+                            barTouchedResultStreamController.sink,
                       ),
                       titlesData: FlTitlesData(
                         show: true,
