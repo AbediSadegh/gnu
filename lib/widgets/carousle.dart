@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:gnu/entities/story.dart';
+import 'package:provider/provider.dart';
 
 class Carousel extends StatefulWidget {
   Carousel({Key key,this.pageController}) : super(key: key);
@@ -83,6 +85,9 @@ class _CarouselState extends State<Carousel> {
             child: PageView.builder(
               controller: controller,
               itemCount: a.length,
+              onPageChanged: (i) {
+                Provider.of<Story>(context).emotion = i;
+              },
               itemBuilder: (BuildContext context, int index) {
                 return Column(
                   mainAxisAlignment: MainAxisAlignment.center,

@@ -77,10 +77,8 @@ class _SavePageState extends State<SavePage> {
               GestureDetector(
 
                 onTap: () {
-                  Navigator.pop(context);
-                  http.post('http://192.168.1.215:3000/api/story',
-                      body: Provider.of<Story>(context).toJson());
 
+                  Navigator.pop(context);
 
                 },
                 child: Container(
