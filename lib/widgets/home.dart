@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
@@ -18,82 +20,110 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xfff4f4f4),
-        bottomNavigationBar: CurvedNavigationBar(
-          color: Theme.of(context).primaryColor,
-          backgroundColor: Colors.transparent,height: 55,
-          items: <Widget>[
-            Icon(Icons.home,size: 36,),
-            Icon(Icons.show_chart,size: 36,),
-            Icon(Icons.person,size: 36,)
-          ],
-          onTap: (i) {
-            setState(() {
-              _page = i;
-            });
-          },
-        ),
-        body: (_page == 0)
-            ? Container(
-                child: Center(
-                  child: Directionality(
-            textDirection: TextDirection.ltr,
-            child: CarouselSlider(
-              enlargeCenterPage: true,
-              aspectRatio: 0.9,
-              reverse: false,
-              initialPage: 0,
-              enableInfiniteScroll: false,
-              items: <Widget>[
-                HomeCard(
-                  onPressed: () {
-                    Navigator.of(context).push(new MaterialPageRoute(builder: (context){
-                      return QuestionPage();
-                    }));
-                  },
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-
-                      Row(
+      bottomNavigationBar: CurvedNavigationBar(
+        color: Theme.of(context).primaryColor,
+        backgroundColor: Colors.transparent,
+        height: 55,
+        items: <Widget>[
+          Icon(
+            Icons.home,
+            size: 36,
+          ),
+          Icon(
+            Icons.show_chart,
+            size: 36,
+          ),
+          Icon(
+            Icons.person,
+            size: 36,
+          )
+        ],
+        onTap: (i) {
+          setState(() {
+            _page = i;
+          });
+        },
+      ),
+      body: (_page == 0)
+          ? Container(
+              child: Center(
+              child: Directionality(
+                textDirection: TextDirection.ltr,
+                child: CarouselSlider(
+                  enlargeCenterPage: true,
+                  aspectRatio: 0.9,
+                  reverse: false,
+                  initialPage: 0,
+                  enableInfiniteScroll: false,
+                  items: <Widget>[
+                    HomeCard(
+                      onPressed: () {
+                        Navigator.of(context)
+                            .push(new MaterialPageRoute(builder: (context) {
+                          return QuestionPage();
+                        }));
+                      },
+                      child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          Icon(Icons.add, color: Colors.white,size: 35,),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Icon(
+                                Icons.add,
+                                color: Colors.white,
+                                size: 35,
+                              ),
+                              SizedBox(
+                                height: 5.0,
+                              ),
+                              Icon(
+                                Icons.edit,
+                                color: Colors.white,
+                              ),
+                            ],
+                          ),
                           SizedBox(
                             height: 5.0,
                           ),
-                          Icon(Icons.edit,color: Colors.white,),
+                          Text(
+                            'شروع پایش جدید',
+                            style: TextStyle(color: Colors.white),
+                          ),
                         ],
                       ),
-
-                      SizedBox(
-                        height: 5.0,
-                      ),
-                      Text('شروع پایش جدید',style: TextStyle(color: Colors.white),
+                      color: Theme.of(context).primaryColor,
+                    ),
+                    HomeCard(
+                      onPressed: () {},
+                    ),
+                    HomeCard(
+                      onPressed: () {},
+                    ),
+                    HomeCard(
+                      onPressed: () {},
                     ),
                   ],
-                  ),color: Theme.of(context).primaryColor,
                 ),
-                HomeCard(
-                  onPressed: () {},
-                ),
-                HomeCard(
-                  onPressed: () {},
-                ),
-                HomeCard(
-                  onPressed: () {},
-                ),
-              ],
-            ),
-          ),
-        ))
-      : (_page == 1)
-                ? Padding(
-                    padding: EdgeInsets.all(6),
-                    child: Column(
-                      children: [LineChartSample2(), LineChartSample2()],
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    ))
-                : Container(),
+              ),
+            ))
+          : (_page == 1)
+              ? Padding(
+                  padding: EdgeInsets.all(6),
+                  child: ListView(
+                    children: [
+                      LineChartSample2(),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      PieChartSample2(),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      BarChartSample1()
+                    ],
+                  ))
+              : Container(),
     );
   }
 }
@@ -234,5 +264,453 @@ class LineChartSample2 extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class PieChartSample2 extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() => PieChart2State();
+}
+
+class PieChart2State extends State {
+  List<PieChartSectionData> pieChartRawSections;
+  List<PieChartSectionData> showingSections;
+
+  StreamController<PieTouchResponse> pieTouchedResultStreamController;
+
+  int touchedIndex;
+
+  @override
+  void initState() {
+    super.initState();
+
+    final section1 = PieChartSectionData(
+      color: Color(0xff0293ee),
+      value: 40,
+      title: "40%",
+      radius: 50,
+      titleStyle: TextStyle(
+          fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xffffffff)),
+    );
+
+    final section2 = PieChartSectionData(
+      color: Color(0xfff8b250),
+      value: 30,
+      title: "30%",
+      radius: 50,
+      titleStyle: TextStyle(
+          fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xffffffff)),
+    );
+
+    final section3 = PieChartSectionData(
+      color: Color(0xff845bef),
+      value: 15,
+      title: "15%",
+      radius: 50,
+      titleStyle: TextStyle(
+          fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xffffffff)),
+    );
+
+    final section4 = PieChartSectionData(
+      color: Color(0xff13d38e),
+      value: 15,
+      title: "15%",
+      radius: 50,
+      titleStyle: TextStyle(
+          fontSize: 16, fontWeight: FontWeight.bold, color: Color(0xffffffff)),
+    );
+
+    final items = [
+      section1,
+      section2,
+      section3,
+      section4,
+    ];
+
+    pieChartRawSections = items;
+
+    showingSections = pieChartRawSections;
+
+    pieTouchedResultStreamController = StreamController();
+    pieTouchedResultStreamController.stream.distinct().listen((details) {
+      if (details == null) {
+        return;
+      }
+
+      touchedIndex = -1;
+      if (details.sectionData != null) {
+        touchedIndex = showingSections.indexOf(details.sectionData);
+      }
+
+      setState(() {
+        if (details.touchInput is FlLongPressEnd) {
+          touchedIndex = -1;
+          showingSections = List.of(pieChartRawSections);
+        } else {
+          showingSections = List.of(pieChartRawSections);
+
+          if (touchedIndex != -1) {
+            final TextStyle style = showingSections[touchedIndex].titleStyle;
+            showingSections[touchedIndex] =
+                showingSections[touchedIndex].copyWith(
+              titleStyle: style.copyWith(
+                fontSize: 24,
+              ),
+              radius: 60,
+            );
+          }
+        }
+      });
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AspectRatio(
+      aspectRatio: 1.3,
+      child: Card(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+        color: Theme.of(context).primaryColor,
+        child: Row(
+          children: <Widget>[
+            SizedBox(
+              height: 18,
+            ),
+            Expanded(
+              child: AspectRatio(
+                aspectRatio: 1,
+                child: FlChart(
+                  chart: PieChart(
+                    PieChartData(
+                        pieTouchData: PieTouchData(
+                            touchResponseStreamSink:
+                                pieTouchedResultStreamController.sink),
+                        borderData: FlBorderData(
+                          show: false,
+                        ),
+                        sectionsSpace: 0,
+                        centerSpaceRadius: 40,
+                        sections: showingSections),
+                  ),
+                ),
+              ),
+            ),
+            Column(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Indicator(
+                  color: Color(0xff0293ee),
+                  text: "First",
+                  isSquare: true,
+                ),
+                SizedBox(
+                  height: 4,
+                ),
+                Indicator(
+                  color: Color(0xfff8b250),
+                  text: "Second",
+                  isSquare: true,
+                ),
+                SizedBox(
+                  height: 4,
+                ),
+                Indicator(
+                  color: Color(0xff845bef),
+                  text: "Third",
+                  isSquare: true,
+                ),
+                SizedBox(
+                  height: 4,
+                ),
+                Indicator(
+                  color: Color(0xff13d38e),
+                  text: "Fourth",
+                  isSquare: true,
+                ),
+                SizedBox(
+                  height: 18,
+                ),
+              ],
+            ),
+            SizedBox(
+              width: 28,
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class Indicator extends StatelessWidget {
+  final Color color;
+  final String text;
+  final bool isSquare;
+  final double size;
+  final Color textColor;
+
+  const Indicator({
+    Key key,
+    this.color,
+    this.text,
+    this.isSquare,
+    this.size = 16,
+    this.textColor = const Color(0xff505050),
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: <Widget>[
+        Container(
+          width: size,
+          height: size,
+          decoration: BoxDecoration(
+            shape: isSquare ? BoxShape.rectangle : BoxShape.circle,
+            color: color,
+          ),
+        ),
+        SizedBox(
+          width: 4,
+        ),
+        Text(
+          text,
+          style: TextStyle(
+              fontSize: 16, fontWeight: FontWeight.bold, color: Colors.white),
+        )
+      ],
+    );
+  }
+}
+
+class BarChartSample1 extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() => BarChartSample1State();
+}
+
+class BarChartSample1State extends State<BarChartSample1> {
+  final Color barColor = Colors.white;
+  final Color barBackgroundColor = const Color(0xff72d8bf);
+  final double width = 22;
+
+  List<BarChartGroupData> rawBarGroups;
+  List<BarChartGroupData> showingBarGroups;
+
+  StreamController<BarTouchResponse> barTouchedResultStreamController;
+
+  int touchedGroupIndex;
+
+  @override
+  void initState() {
+    super.initState();
+    final barGroup1 = makeGroupData(0, 5);
+    final barGroup2 = makeGroupData(1, 6.5);
+    final barGroup3 = makeGroupData(2, 5);
+    final barGroup4 = makeGroupData(3, 7.5);
+    final barGroup5 = makeGroupData(4, 9);
+    final barGroup6 = makeGroupData(5, 11.5);
+    final barGroup7 = makeGroupData(6, 6.5);
+
+    final items = [
+      barGroup1,
+      barGroup2,
+      barGroup3,
+      barGroup4,
+      barGroup5,
+      barGroup6,
+      barGroup7,
+    ];
+
+    rawBarGroups = items;
+
+    showingBarGroups = rawBarGroups;
+
+    barTouchedResultStreamController = StreamController();
+    barTouchedResultStreamController.stream
+        .distinct()
+        .listen((BarTouchResponse response) {
+      if (response == null) {
+        return;
+      }
+
+      if (response.spot == null) {
+        setState(() {
+          touchedGroupIndex = -1;
+          showingBarGroups = List.of(rawBarGroups);
+        });
+        return;
+      }
+
+      touchedGroupIndex =
+          showingBarGroups.indexOf(response.spot.touchedBarGroup);
+
+      setState(() {
+        if (response.touchInput is FlLongPressEnd) {
+          touchedGroupIndex = -1;
+          showingBarGroups = List.of(rawBarGroups);
+        } else {
+          showingBarGroups = List.of(rawBarGroups);
+          if (touchedGroupIndex != -1) {
+            showingBarGroups[touchedGroupIndex] =
+                showingBarGroups[touchedGroupIndex].copyWith(
+              barRods: showingBarGroups[touchedGroupIndex].barRods.map((rod) {
+                return rod.copyWith(color: Colors.yellow, y: rod.y + 1);
+              }).toList(),
+            );
+          }
+        }
+      });
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return AspectRatio(
+      aspectRatio: 1,
+      child: Card(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+        color: Color(0xff81e5cd),
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisSize: MainAxisSize.max,
+            children: <Widget>[
+              Text(
+                "Mingguan",
+                style: TextStyle(
+                    color: Color(0xff0f4a3c),
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold),
+              ),
+              SizedBox(
+                height: 4,
+              ),
+              Text(
+                "Grafik konsumsi kalori",
+                style: TextStyle(
+                    color: Color(0xff379982),
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold),
+              ),
+              SizedBox(
+                height: 38,
+              ),
+              Expanded(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: FlChart(
+                    chart: BarChart(BarChartData(
+                      barTouchData: BarTouchData(
+                        touchTooltipData: TouchTooltipData(
+                            tooltipBgColor: Colors.blueGrey,
+                            getTooltipItems: (touchedSpots) {
+                              return touchedSpots.map((touchedSpot) {
+                                String weekDay;
+                                switch (touchedSpot.spot.x.toInt()) {
+                                  case 0:
+                                    weekDay = 'Monday';
+                                    break;
+                                  case 1:
+                                    weekDay = 'Tuesday';
+                                    break;
+                                  case 2:
+                                    weekDay = 'Wednesday';
+                                    break;
+                                  case 3:
+                                    weekDay = 'Thursday';
+                                    break;
+                                  case 4:
+                                    weekDay = 'Friday';
+                                    break;
+                                  case 5:
+                                    weekDay = 'Saturday';
+                                    break;
+                                  case 6:
+                                    weekDay = 'Sunday';
+                                    break;
+                                }
+                                return TooltipItem(
+                                    weekDay +
+                                        '\n' +
+                                        touchedSpot.spot.y.toString(),
+                                    TextStyle(color: Colors.yellow));
+                              }).toList();
+                            }),
+                        touchResponseSink:
+                            barTouchedResultStreamController.sink,
+                      ),
+                      titlesData: FlTitlesData(
+                        show: true,
+                        bottomTitles: SideTitles(
+                            showTitles: true,
+                            textStyle: TextStyle(
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 14),
+                            margin: 16,
+                            getTitles: (double value) {
+                              switch (value.toInt()) {
+                                case 0:
+                                  return 'M';
+                                case 1:
+                                  return 'T';
+                                case 2:
+                                  return 'W';
+                                case 3:
+                                  return 'T';
+                                case 4:
+                                  return 'F';
+                                case 5:
+                                  return 'S';
+                                case 6:
+                                  return 'S';
+                              }
+                            }),
+                        leftTitles: SideTitles(
+                          showTitles: false,
+                        ),
+                      ),
+                      borderData: FlBorderData(
+                        show: false,
+                      ),
+                      barGroups: showingBarGroups,
+                    )),
+                  ),
+                ),
+              ),
+              SizedBox(
+                height: 12,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  BarChartGroupData makeGroupData(int x, double y) {
+    return BarChartGroupData(x: x, barRods: [
+      BarChartRodData(
+        y: y,
+        color: barColor,
+        width: width,
+        isRound: true,
+        backDrawRodData: BackgroundBarChartRodData(
+          show: true,
+          y: 20,
+          color: barBackgroundColor,
+        ),
+      ),
+    ]);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    barTouchedResultStreamController.close();
   }
 }
