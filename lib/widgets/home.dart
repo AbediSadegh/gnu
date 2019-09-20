@@ -22,53 +22,71 @@ class _HomeState extends State<Home> {
   bool _firstRunLocalVar;
   static bool firstRun = true;
   int _page = 0;
-
+  int state = 0;
   @override
   void initState() {
     super.initState();
     this._firstRunLocalVar = _HomeState.firstRun;
     if (firstRun) _HomeState.firstRun = false;
   }
-
+  Color color;
+  void returnColor(){
+    if(state == 0){
+      color = Color(0xffED6A5A);
+    }else if(state == 1){
+      color = Color(0xffF3DE8A);
+    }else if(state == 2){
+      color = Color(0xff84ACCE);
+    }else if(state == 3){
+      color = Color(0xff83B692);
+    }else if(state == 4){
+      color = Colors.grey;
+    }else color = Color(0xfff4f4f4);
+  }
   @override
   Widget build(BuildContext context) {
+    returnColor();
     return _firstRunLocalVar
         ? Scaffold(
             backgroundColor: Color(0xfff4f4f4),
             body: body(),
-          )
-        : Scaffold(
-            backgroundColor: Color(0xfff4f4f4),
-            bottomNavigationBar: CurvedNavigationBar(
-              color: Theme.of(context).primaryColor,
-              backgroundColor: Colors.transparent,
-              height: 55,
-              items: <Widget>[
-                Icon(
-                  Icons.home,
-                  size: 36,
-                ),
-                !_firstRunLocalVar
-                    ? Icon(
-                        Icons.show_chart,
-                        size: 36,
-                      )
-                    : null,
-                !_firstRunLocalVar
-                    ? Icon(
-                        Icons.person,
-                        size: 36,
-                      )
-                    : null,
-              ],
-              onTap: (i) {
-                setState(() {
-                  _page = i;
-                });
-              },
+          ):AnimatedContainer(height: MediaQuery.of(context).size.height,
+      width: MediaQuery.of(context).size.width,
+      color: color,
+      duration: Duration(milliseconds: 800),
+      curve: Curves.linear,child: Scaffold(
+        backgroundColor: Colors.transparent,
+        bottomNavigationBar: CurvedNavigationBar(
+          color: Theme.of(context).primaryColor,
+          backgroundColor: Colors.transparent,
+          height: 55,
+          items: <Widget>[
+            Icon(
+              Icons.home,
+              size: 36,
             ),
-            body: body(),
-          );
+            !_firstRunLocalVar
+                ? Icon(
+              Icons.show_chart,
+              size: 36,
+            )
+                : null,
+            !_firstRunLocalVar
+                ? Icon(
+              Icons.person,
+              size: 36,
+            )
+                : null,
+          ],
+          onTap: (i) {
+            setState(() {
+              _page = i;
+            });
+          },
+        ),
+        body: body(),
+      ),);
+
   }
 
   Widget body() {
@@ -78,6 +96,13 @@ class _HomeState extends State<Home> {
             child: Directionality(
               textDirection: TextDirection.ltr,
               child: CarouselSlider(
+                onPageChanged: (int stat){
+                  if(stat != state){
+                    setState(() {
+                      state = stat;
+                    });
+                  }
+                },
                 enlargeCenterPage: true,
                 aspectRatio: 0.9,
                 reverse: false,

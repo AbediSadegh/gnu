@@ -39,7 +39,7 @@ class MenuScreen extends StatelessWidget{
 //                  NetworkImage(imageUrl),
 //                ),
 //              ),
-              Text(Provider.of<Name>(context).name,
+              Text(Provider.of<Name>(context).name ?? "",
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 20,
