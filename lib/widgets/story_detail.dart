@@ -1,6 +1,8 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:gnu/widgets/home.dart';
+import 'package:gnu/widgets/sliding_up_panel/sliding_up_panel.dart';
 
 class StoryDetail extends StatelessWidget {
   final String imgSrc;
@@ -10,147 +12,92 @@ class StoryDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(),
+      body: SlidingUpPanel(
+        color: Color(0xffeeeeee),
+        margin: EdgeInsets.all(0.0),
+        padding: EdgeInsets.all(0.0),
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(10.0),
+          topRight: Radius.circular(10.0),
+        ),
+        panel: _scrollingList(),
+        body: Container(
+          child: Stack(
+            fit: StackFit.expand,
+            children: <Widget>[
+              Image.asset(
+                this.imgSrc,
+                fit: BoxFit.fill,
+              ),
+              Positioned(
+                left: 15.0,
+                top: 25.0,
+                child: ClipOval(
+
+                  child: Container(
+                    height: 43.0,
+                    width: 43.0,
+                    alignment: Alignment.center,
+                    color: Colors.white,
+                    child: IconButton(
+                      color: Colors.black54,
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      icon: Icon(Icons.arrow_downward),
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget _scrollingList() {
+    return Container(
+      //adding a margin to the top leaves an area where the user can swipe
+      //to open/close the sliding panel
+      margin: const EdgeInsets.only(top: 36.0),
+
+      color: Colors.white,
+      child: ListView.builder(
+        itemCount: 15,
+        itemBuilder: (BuildContext context, int i) {
+          return DetailCard(
+            title: 'تیتر $i',
+            content: 'تغییر پایش، اضافه کردن محتوا',
+          );
+        },
+      ),
     );
   }
 }
 
-class StoryDetailPage extends StatefulWidget {
-  final String imgSrc;
+class DetailCard extends StatelessWidget {
+  final String title, content;
 
-  StoryDetailPage({this.imgSrc});
-
-  @override
-  _StoryDetailPageState createState() => _StoryDetailPageState();
-}
-
-class _StoryDetailPageState extends State<StoryDetailPage> {
-  @override
-  void initState() {
-    super.initState();
-    Timer(Duration(milliseconds: 250), () {
-      _onButtonPressed();
-    });
-  }
+  DetailCard({this.title, this.content});
 
   @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: <Widget>[
-        Column(
-          children: <Widget>[
-            Image.asset(
-              widget.imgSrc,
-              width: double.maxFinite,
-              height: MediaQuery.of(context).size.height,
-              fit: BoxFit.cover,
-            ),
-          ],
-        ),
-        SizedBox(
-          height: MediaQuery.of(context).size.height,
-          child: IconButton(
-            onPressed: () {},
-            icon: Icon(
-              Icons.arrow_back_ios,
-              color: Colors.white,
-              size: 45.0,
-            ),
+    return Container(
+      padding: const EdgeInsets.all(12.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: <Widget>[
+          Text(
+            this.title,
+            style: TextStyle(color: Colors.black54, fontSize: 18.0),
           ),
-        ),
-      ],
-    );
-  }
-
-  void _onButtonPressed() {
-    showModalBottomSheet(
-      context: context,
-      builder: (context) {
-        return Container(
-          color: Color(0xFF737373),
-          height: MediaQuery.of(context).size.height * 0.75,
-          child: Container(
-            child: _buildBottomNavigation(),
-            decoration: BoxDecoration(
-              color: Theme.of(context).canvasColor,
-              borderRadius: BorderRadius.only(
-                topLeft: const Radius.circular(10),
-                topRight: const Radius.circular(10),
-              ),
-            ),
+          SizedBox(
+            height: 10.0,
           ),
-        );
-      },
-    );
-  }
-
-  Widget _buildBottomNavigation() {
-    return ListView(
-//      mainAxisAlignment: MainAxisAlignment.center,
-      children: <Widget>[
-        Text(
-          'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و',
-          textAlign: TextAlign.center,
-        ),
-        Text(
-          'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده',
-          textAlign: TextAlign.center,
-        ),
-        Text(
-            'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده',
-            textAlign: TextAlign.center),
-        Text(
-          'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و',
-          textAlign: TextAlign.center,
-        ),
-        Text(
-          'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده',
-          textAlign: TextAlign.center,
-        ),
-        Text(
-            'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده',
-            textAlign: TextAlign.center),
-        Text(
-          'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و',
-          textAlign: TextAlign.center,
-        ),
-        Text(
-          'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده',
-          textAlign: TextAlign.center,
-        ),
-        Text(
-            'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده',
-            textAlign: TextAlign.center),
-        Text(
-          'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و',
-          textAlign: TextAlign.center,
-        ),
-        Text(
-          'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده',
-          textAlign: TextAlign.center,
-        ),
-        Text(
-            'لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده',
-            textAlign: TextAlign.center),
-        Material(
-          shape: StadiumBorder(),
-          child: Ink(
-            height: 50,
-            width: 150,
-            decoration: ShapeDecoration(
-                shape: StadiumBorder(),
-                gradient:
-                    LinearGradient(colors: [Colors.green, Colors.greenAccent])),
-            child: InkWell(
-              splashColor: Colors.grey,
-              // highlightColor: Colors.lightGreen,
-              customBorder: StadiumBorder(),
-              onTap: () {},
-              child: Center(child: Text('data')),
-            ),
-          ),
-        )
-      ],
+          Text(this.content)
+        ],
+      ),
     );
   }
 }
