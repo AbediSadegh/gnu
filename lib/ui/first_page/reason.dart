@@ -5,8 +5,9 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class ReasonPage extends StatelessWidget {
   PageController controller;
+  String mood;
 
-  ReasonPage(this.controller);
+  ReasonPage(this.controller, this.mood);
 
   @override
   Widget build(BuildContext context) {
@@ -23,55 +24,59 @@ class ReasonPage extends StatelessWidget {
             child: Container(
               width: MediaQuery.of(context).size.width * .75,
               child: Text(
-                "لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است.",
+                "هووم چی باعت شده روزت $mood ",
                 style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 textAlign: TextAlign.justify,
               ),
             ),
           ),
           SizedBox(
-            height: 35,
+            height: 55,
           ),
-          Container(
-            height: MediaQuery.of(context).size.height * .45,
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
-                    CreateColumn(
-                        FontAwesomeIcons.mailBulk, () {}, "کار", controller),
-                    CreateColumn(
-                        FontAwesomeIcons.home, () {}, "خانواده", controller),
-                    CreateColumn(
-                        FontAwesomeIcons.heart, () {}, "رابطه", controller),
-                  ],
-                ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
-                    CreateColumn(
-                        FontAwesomeIcons.pen, () {}, "تحصیل", controller),
-                    CreateColumn(
-                        FontAwesomeIcons.coffee, () {}, "غذا", controller),
-                    CreateColumn(FontAwesomeIcons.mailchimp, () {}, "مسافرت",
-                        controller),
-                  ],
-                ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[
-                    CreateColumn(
-                        FontAwesomeIcons.pen, () {}, "دوست", controller),
-                    CreateColumn(
-                        FontAwesomeIcons.running, () {}, "ورزش", controller),
-                    CreateColumn(
-                        FontAwesomeIcons.memory, () {}, "فعالیت ها", controller),
-                  ],
-                ),
-              ],
+          Expanded(
+            child: Container(
+//              height: MediaQuery.of(context).size.height * .55,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: <Widget>[
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      CreateColumn(
+                          FontAwesomeIcons.mailBulk, () {}, "کار", controller),
+                      CreateColumn(
+                          FontAwesomeIcons.home, () {}, "خانواده", controller),
+                      CreateColumn(
+                          FontAwesomeIcons.plus, () {}, "سایر", controller,color: Colors.grey,),
+                    ],
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      CreateColumn(
+                          FontAwesomeIcons.pen, () {}, "تحصیل", controller),
+                      CreateColumn(
+                          FontAwesomeIcons.coffee, () {}, "غذا", controller),
+                      CreateColumn(FontAwesomeIcons.mailchimp, () {}, "مسافرت",
+                          controller),
+                    ],
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      CreateColumn(Icons.person, () {}, "دوستان", controller),
+                      CreateColumn(
+                          FontAwesomeIcons.heart, () {}, "رابطه ", controller),
+                      CreateColumn(FontAwesomeIcons.memory, () {}, "فعالیت ها",
+                          controller),
+                    ],
+                  ),
+                ],
+              ),
             ),
+          ),
+          SizedBox(
+            height: 55,
           ),
         ],
       ),
@@ -83,9 +88,10 @@ class CreateColumn extends StatefulWidget {
   IconData icon;
   String title;
   final function;
+  Color color;
   PageController controller;
 
-  CreateColumn(this.icon, this.function, this.title, this.controller);
+  CreateColumn(this.icon, this.function, this.title, this.controller,{this.color});
 
   @override
   _CreateColumnState createState() => _CreateColumnState();
@@ -96,6 +102,18 @@ class _CreateColumnState extends State<CreateColumn> {
 
   @override
   Widget build(BuildContext context) {
+    Color color;
+    returnColor() {
+//      isSelected ? Theme.of(context).primaryColor : Colors.white
+      if (isSelected) {
+        color = Theme.of(context).primaryColor;
+      } else if (widget.color != null) {
+        color = widget.color;
+      } else
+        color = Colors.white;
+    }
+    returnColor();
+
     return GestureDetector(
       onTap: () {
         setState(() {
@@ -114,7 +132,8 @@ class _CreateColumnState extends State<CreateColumn> {
         height: 90,
         decoration: ShapeDecoration(
             color: isSelected ? Colors.white : Colors.transparent,
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15))),
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15))),
         width: MediaQuery.of(context).size.width * .29,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -122,7 +141,7 @@ class _CreateColumnState extends State<CreateColumn> {
             Icon(
               widget.icon,
               size: 25,
-              color: isSelected ? Theme.of(context).primaryColor : Colors.white,
+              color: color,
             ),
             SizedBox(
               height: 5,
@@ -131,7 +150,8 @@ class _CreateColumnState extends State<CreateColumn> {
               widget.title ?? "",
               style: TextStyle(
                 color:
-                    isSelected ? Theme.of(context).primaryColor : Colors.white,
+                    color,
+                fontFamily: "Iranyekan"
               ),
             ),
           ],
