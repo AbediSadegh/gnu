@@ -7,6 +7,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:gnu/ui/profile.dart';
 import 'package:gnu/ui/question.dart';
 
 import 'package:fl_chart/fl_chart.dart';
@@ -16,8 +17,6 @@ class Home extends StatefulWidget {
   @override
   _HomeState createState() => _HomeState();
 }
-
-
 
 class _HomeState extends State<Home> {
   bool _firstRunLocalVar;
@@ -31,87 +30,93 @@ class _HomeState extends State<Home> {
     if (firstRun) _HomeState.firstRun = false;
   }
 
-
   @override
   Widget build(BuildContext context) {
-    return _firstRunLocalVar ?
-        Scaffold(
-          backgroundColor: Color(0xfff4f4f4),
-          body: body(),
-        )
+    return _firstRunLocalVar
+        ? Scaffold(
+            backgroundColor: Color(0xfff4f4f4),
+            body: body(),
+          )
         : Scaffold(
-      backgroundColor: Color(0xfff4f4f4),
-      bottomNavigationBar: CurvedNavigationBar(
-        color: Theme.of(context).primaryColor,
-        backgroundColor: Colors.transparent,
-        height: 55,
-        items: <Widget>[
-          Icon(
-            Icons.home,
-            size: 36,
-          ),
-          !_firstRunLocalVar ? Icon(
-            Icons.show_chart,
-            size: 36,
-          ) : null,
-          !_firstRunLocalVar ? Icon(
-            Icons.person,
-            size: 36,
-          ): null,
-        ],
-        onTap: (i) {
-          setState(() {
-            _page = i;
-          });
-        },
-      ),
-      body: body(),
-    );
-  }
-  Widget body(){
-    return (_page == 0)
-        ? Container(
-        child: Center(
-          child: Directionality(
-            textDirection: TextDirection.ltr,
-            child: CarouselSlider(
-              enlargeCenterPage: true,
-              aspectRatio: 0.9,
-              reverse: false,
-              initialPage: 0,
-              enableInfiniteScroll: false,
-              items: _getItems(),
+            backgroundColor: Color(0xfff4f4f4),
+            bottomNavigationBar: CurvedNavigationBar(
+              color: Theme.of(context).primaryColor,
+              backgroundColor: Colors.transparent,
+              height: 55,
+              items: <Widget>[
+                Icon(
+                  Icons.home,
+                  size: 36,
+                ),
+                !_firstRunLocalVar
+                    ? Icon(
+                        Icons.show_chart,
+                        size: 36,
+                      )
+                    : null,
+                !_firstRunLocalVar
+                    ? Icon(
+                        Icons.person,
+                        size: 36,
+                      )
+                    : null,
+              ],
+              onTap: (i) {
+                setState(() {
+                  _page = i;
+                });
+              },
             ),
-          ),
-        ))
-        : (_page == 1)
-        ? Padding(
-      padding: EdgeInsets.all(6),
-      child: ListView(
-        children: [
-          LineChartSample2(),
-          SizedBox(
-            height: 10,
-          ),
-          PieChartSample2(),
-          SizedBox(
-            height: 10,
-          ),
-          BarChartSample1()
-        ],
-      ),)
-        : Container();
+            body: body(),
+          );
   }
 
-  List<Widget> _getItems(){
-    if (!_firstRunLocalVar){
+  Widget body() {
+    return (_page == 0)
+        ? Container(
+            child: Center(
+            child: Directionality(
+              textDirection: TextDirection.ltr,
+              child: CarouselSlider(
+                enlargeCenterPage: true,
+                aspectRatio: 0.9,
+                reverse: false,
+                initialPage: 0,
+                enableInfiniteScroll: false,
+                items: _getItems(),
+              ),
+            ),
+          ))
+        : (_page == 1)
+            ? Padding(
+                padding: EdgeInsets.all(6),
+                child: ListView(
+                  children: [
+                    LineChartSample2(),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    PieChartSample2(),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    BarChartSample1()
+                  ],
+                ),
+              )
+            : Profile();
+  }
+
+  List<Widget> _getItems() {
+    if (!_firstRunLocalVar) {
       return <Widget>[
         HomeCard(
           date: null,
           moodIcon: null,
           onPressed: () {
-            Navigator.of(context)
-                .push(ScaleRoute(page: QuestionPage()));
+
+            Navigator.of(context).push(ScaleRoute(page: QuestionPage()));
+
           },
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -142,9 +147,7 @@ class _HomeState extends State<Home> {
               ),
             ],
           ),
-          color: Theme
-              .of(context)
-              .primaryColor,
+          color: Theme.of(context).primaryColor,
         ),
         HomeCard(
           date: '1398/11/5',
@@ -152,8 +155,8 @@ class _HomeState extends State<Home> {
           onPressed: () {
             Navigator.of(context).push(ScaleRoute(
                 page: StoryDetail(
-                  imgSrc: 'asset/photo-1.jpg',
-                )));
+              imgSrc: 'asset/photo-1.jpg',
+            )));
           },
           child: Container(
             child: Image.asset(
@@ -168,8 +171,8 @@ class _HomeState extends State<Home> {
           onPressed: () {
             Navigator.of(context).push(ScaleRoute(
                 page: StoryDetail(
-                  imgSrc: 'asset/photo-2.jpg',
-                )));
+              imgSrc: 'asset/photo-2.jpg',
+            )));
           },
           child: Container(
             child: Image.asset(
@@ -184,8 +187,8 @@ class _HomeState extends State<Home> {
           onPressed: () {
             Navigator.of(context).push(ScaleRoute(
                 page: StoryDetail(
-                  imgSrc: 'asset/photo-3.jpg',
-                )));
+              imgSrc: 'asset/photo-3.jpg',
+            )));
           },
           child: Container(
             width: double.maxFinite,
@@ -197,14 +200,19 @@ class _HomeState extends State<Home> {
           ),
         ),
       ];
-    }else {
+    } else {
       return <Widget>[
         HomeCard(
           date: null,
           moodIcon: null,
           onPressed: () {
-            Navigator.of(context)
-                .push(ScaleRoute(page: QuestionPage()));
+            Timer(Duration(milliseconds: 500),(){
+              setState(() {
+                firstRun = false;
+                _firstRunLocalVar = false;
+              });
+            });
+            Navigator.of(context).push(ScaleRoute(page: QuestionPage()));
           },
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -241,8 +249,6 @@ class _HomeState extends State<Home> {
     }
   }
 }
-
-
 
 class ScaleRoute extends PageRouteBuilder {
   final Widget page;
@@ -299,7 +305,7 @@ class HomeCard extends StatelessWidget {
         child: FlatButton(
           clipBehavior: Clip.antiAlias,
           shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
           padding: EdgeInsets.all(0.0),
           onPressed: this.onPressed,
           child: Stack(

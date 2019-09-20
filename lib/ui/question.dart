@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:gnu/entities/story.dart';
 import 'package:gnu/ui/first_page/reason.dart';
 import 'package:gnu/ui/save_page.dart';
 import 'package:gnu/widgets/carousle.dart';
 import 'package:gnu/widgets/date_page.dart';
 import 'package:gnu/widgets/gnu_slider.dart';
-
-//import 'package:gnu/widgets/gnu_carousel_slider.dart';
-//import 'package:gnu/widgets/gnu_slider.dart';
-import 'package:gnu/widgets/story_slider.dart';
+import 'package:provider/provider.dart';
 
 class QuestionPage extends StatefulWidget {
   @override
@@ -47,7 +45,7 @@ class _QuestionPageState extends State<QuestionPage> {
         },
       ),
       ReasonPage(controller, mood),
-      Carousel(),
+      Carousel(pageController: controller,),
       SavePage(),
     ];
     return Directionality(

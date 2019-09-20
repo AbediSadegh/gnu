@@ -1,13 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:gnu/ui/advertise.dart';
 
 class MenuScreen extends StatelessWidget{
 
   //final String imageUrl = "https://celebritypets.net/wp-content/uploads/2016/12/Adriana-Lima.jpg";
 
   final List<MenuItem> options = [
-    MenuItem(Icons.search, 'Search'),
-    MenuItem(Icons.shopping_basket, 'Basket'),
-    MenuItem(Icons.favorite, 'Discounts'),
+    MenuItem(FontAwesomeIcons.mailBulk, "کار",0),
+    MenuItem(FontAwesomeIcons.home, 'خانواده',1),
+//    MenuItem(FontAwesomeIcons.plus, 'سایر',2),
+//    MenuItem(FontAwesomeIcons.pen, 'تحصیل',3),
+    MenuItem(FontAwesomeIcons.coffee, 'غذا',4),
+    MenuItem(FontAwesomeIcons.mailchimp, 'مسافرت',5),
+    MenuItem(Icons.person, 'دوستان',6),
+//    MenuItem(FontAwesomeIcons.heart, 'رابطه',7),
+//    MenuItem(FontAwesomeIcons.memory, 'فعالیت ها',8),
     //MenuItem(Icons.code, 'Prom-codes'),
     //MenuItem(Icons.format_list_bulleted, 'Orders'),
   ];
@@ -36,11 +44,16 @@ class MenuScreen extends StatelessWidget{
               )
             ],
           ),
-          Spacer(),
+          Expanded(child: Container(),),
+
           Column(
             children: options.map((item) {
               return ListTile(
-                onTap: (){},
+                onTap: (){
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context){
+                    return AdvertisePage();
+                  }));
+                },
                 leading: Icon(item.icon, color: Colors.white, size: 20,),
                 title: Text(item.title,
                   style: TextStyle(
@@ -52,24 +65,9 @@ class MenuScreen extends StatelessWidget{
               );
             }).toList(),
           ),
+          Expanded(child: Container(),),
 
-          Spacer(),
 
-          ListTile(
-            onTap: (){},
-            leading: Icon(Icons.settings, color: Colors.white, size: 20,),
-            title: Text('Settings',
-                style: TextStyle(
-                    fontSize: 14,
-                    color: Colors.white
-                )),),
-          ListTile(
-            leading: Icon(Icons.headset_mic, color: Colors.white, size: 20,),
-            title: Text('Support',
-                style: TextStyle(
-                    fontSize: 14,
-                    color: Colors.white
-                )),),
         ],
       ),
     );
@@ -80,6 +78,7 @@ class MenuScreen extends StatelessWidget{
 class MenuItem{
   String title;
   IconData icon;
+  int number;
 
-  MenuItem(this.icon, this.title);
+  MenuItem(this.icon, this.title,this.number);
 }

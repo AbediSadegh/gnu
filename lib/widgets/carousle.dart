@@ -2,7 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class Carousel extends StatefulWidget {
-  Carousel({Key key}) : super(key: key);
+  Carousel({Key key,this.pageController}) : super(key: key);
+  PageController pageController;
+
+
+
 
   _CarouselState createState() => _CarouselState();
 }
@@ -29,7 +33,8 @@ List<String> b = [
   'خوب',
   'عصبانی',
   'گیج',
-  'مضطرب','داغون',
+  'مضطرب',
+  'داغون',
 ];
 
 class _CarouselState extends State<Carousel> {
@@ -93,7 +98,7 @@ class _CarouselState extends State<Carousel> {
                     Text(
                       b[index],
                       style: TextStyle(
-                          fontSize: 20 + (1.00 - (page - index).abs() * 10)),
+                          fontSize: 16 + (1.00 - (page - index).abs() * 10)),
                     ),
                   ],
                 );
@@ -101,9 +106,25 @@ class _CarouselState extends State<Carousel> {
             ),
           ),
         ),
-        SizedBox(
-          height: MediaQuery.of(context).size.height * .3,
-        ),
+       Expanded(
+         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+           crossAxisAlignment: CrossAxisAlignment.center,
+           children: <Widget>[
+             Container(width: double.maxFinite,),
+             FlatButton(
+               shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(45))),
+               color: Colors.white,
+               child: Container(
+                   width: MediaQuery.of(context).size.width *0.5,
+                   child: Center(child: Text("ادامه",style: TextStyle(color: Theme.of(context).primaryColor),))),
+               onPressed: (){
+                 widget.pageController.nextPage(duration: Duration(milliseconds: 500), curve: Curves.linear);
+               },
+             ),
+           ],
+         ),
+       ),
       ],
     );
   }

@@ -42,7 +42,7 @@ class _ZoomScaffoldState extends State<ZoomScaffold>
         backgroundColor: Colors.white,
         appBar: PreferredSize(
             child: Container(
-              height: MediaQuery.of(context).size.height * .12,
+              height: 70,
               color: Color(0xfff4f4f4),
               child: Row(
                 children: <Widget>[
@@ -59,7 +59,7 @@ class _ZoomScaffoldState extends State<ZoomScaffold>
                     width: 0,
                   ),
                 ],
-                crossAxisAlignment: CrossAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.end,
                 mainAxisAlignment: MainAxisAlignment.start,
               ),
             ),

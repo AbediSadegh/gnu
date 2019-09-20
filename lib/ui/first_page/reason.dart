@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:gnu/entities/story.dart';
+import 'package:provider/provider.dart';
 
 class ReasonPage extends StatelessWidget {
   PageController controller;
@@ -17,7 +19,7 @@ class ReasonPage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           SizedBox(
-            height: 100,
+            height: 105,
           ),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20.0),
@@ -31,7 +33,7 @@ class ReasonPage extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: 55,
+            height: 10,
           ),
           Expanded(
             child: Container(
@@ -42,38 +44,60 @@ class ReasonPage extends StatelessWidget {
                   Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
+                      CreateColumn(FontAwesomeIcons.mailBulk, () {}, "کار",
+                          controller, 0),
+                      CreateColumn(FontAwesomeIcons.home, () {}, "خانواده",
+                          controller, 1),
                       CreateColumn(
-                          FontAwesomeIcons.mailBulk, () {}, "کار", controller),
-                      CreateColumn(
-                          FontAwesomeIcons.home, () {}, "خانواده", controller),
-                      CreateColumn(
-                          FontAwesomeIcons.plus, () {}, "سایر", controller,color: Colors.grey,),
+                        FontAwesomeIcons.plus,
+                        () {},
+                        "سایر",
+                        controller,
+                        2,
+                        color: Colors.grey,
+                      ),
                     ],
                   ),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
                       CreateColumn(
-                          FontAwesomeIcons.pen, () {}, "تحصیل", controller),
+                          FontAwesomeIcons.pen, () {}, "تحصیل", controller, 3),
                       CreateColumn(
-                          FontAwesomeIcons.coffee, () {}, "غذا", controller),
+                          FontAwesomeIcons.coffee, () {}, "غذا", controller, 4),
                       CreateColumn(FontAwesomeIcons.mailchimp, () {}, "مسافرت",
-                          controller),
+                          controller, 5),
                     ],
                   ),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: <Widget>[
-                      CreateColumn(Icons.person, () {}, "دوستان", controller),
                       CreateColumn(
-                          FontAwesomeIcons.heart, () {}, "رابطه ", controller),
+                          Icons.person, () {}, "دوستان", controller, 6),
+                      CreateColumn(FontAwesomeIcons.heart, () {}, "رابطه ",
+                          controller, 7),
                       CreateColumn(FontAwesomeIcons.memory, () {}, "فعالیت ها",
-                          controller),
+                          controller, 8),
                     ],
                   ),
                 ],
               ),
             ),
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              FlatButton(
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(45))),
+                color: Colors.white,
+                child: Container(
+                    width: MediaQuery.of(context).size.width *0.5,
+                    child: Center(child: Text("ادامه",style: TextStyle(color: Theme.of(context).primaryColor),))),
+                onPressed: (){
+                  controller.nextPage(duration: Duration(milliseconds: 500), curve: Curves.linear);
+                },
+              ),
+            ],
           ),
           SizedBox(
             height: 55,
@@ -89,9 +113,12 @@ class CreateColumn extends StatefulWidget {
   String title;
   final function;
   Color color;
+  int number;
   PageController controller;
 
-  CreateColumn(this.icon, this.function, this.title, this.controller,{this.color});
+  CreateColumn(
+      this.icon, this.function, this.title, this.controller, this.number,
+      {this.color});
 
   @override
   _CreateColumnState createState() => _CreateColumnState();
@@ -112,17 +139,27 @@ class _CreateColumnState extends State<CreateColumn> {
       } else
         color = Colors.white;
     }
+
     returnColor();
 
     return GestureDetector(
       onTap: () {
-        setState(() {
-          isSelected = true;
-        });
-        Timer(Duration(milliseconds: 120), () {
-          widget.controller.nextPage(
-              duration: Duration(milliseconds: 850), curve: Curves.linear);
-        });
+        if(isSelected){
+          setState(() {
+            isSelected = false;
+//          Provider.of<Story>(context).category = widget.number;
+          });
+        }else {
+          setState(() {
+            isSelected = true;
+//          Provider.of<Story>(context).category = widget.number;
+          });
+        }
+
+//        Timer(Duration(milliseconds: 120), () {
+//          widget.controller.nextPage(
+//              duration: Duration(milliseconds: 850), curve: Curves.linear);
+//        });
 
         widget.function();
       },
@@ -148,11 +185,7 @@ class _CreateColumnState extends State<CreateColumn> {
             ),
             Text(
               widget.title ?? "",
-              style: TextStyle(
-                color:
-                    color,
-                fontFamily: "Iranyekan"
-              ),
+              style: TextStyle(color: color, fontFamily: "Iranyekan"),
             ),
           ],
         ),

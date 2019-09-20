@@ -21,6 +21,8 @@ dependencies:
     sdk: flutter
   curved_navigation_bar: ^0.3.1
   fl_chart: ^0.2.2
+  provider: ^3.1.0
+  http: ^0.12.0+2
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
@@ -31,6 +33,7 @@ dependencies:
   flutter_svg: ^0.14.1
   datetime_picker_formfield: ^0.4.3
   hidden_drawer_menu: ^1.1.2
+#  intl: ^0.16.0
 
 dev_dependencies:
   flutter_test:
