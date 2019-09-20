@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:gnu/ui/first_page/page_view.dart';
-import 'package:gnu/widgets/home.dart';
 
 void main() => runApp(Launcher());
 
@@ -22,7 +21,7 @@ class Launcher extends StatelessWidget {
         ),
         iconTheme: IconThemeData(color: Color(0xffdfe5ee), size: 55.0),
       ),
-      home: Home(),
+      home: FirstPage(),
     );
   }
 }

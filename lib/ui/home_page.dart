@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:gnu/widgets/home.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HomePage extends StatefulWidget {
@@ -23,9 +24,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-    );
+    return Home();
   }
 
   void _onButtonPressed() {
@@ -109,11 +108,14 @@ class _HomePageState extends State<HomePage> {
                     splashColor: Colors.grey,
                     // highlightColor: Colors.lightGreen,
                     customBorder: StadiumBorder(),
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
                     child: Center(child: Text('شروع',)),
                   ),
                 ),
-              )
+              ),
+              SizedBox(height: 5,)
             ],
           ),
         ),

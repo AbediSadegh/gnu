@@ -38,10 +38,6 @@ class _FirstPageState extends State<FirstPage> {
       ),
 //      ReasonPage(controller),
       NamePage(controller:controller),
-      GnuSlider(),
-      DatePage(),
-      Carousel(),
-
     ];
     return Directionality(
       textDirection: TextDirection.rtl,
