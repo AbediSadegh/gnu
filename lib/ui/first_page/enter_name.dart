@@ -110,8 +110,8 @@ class _NamePageState extends State<NamePage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
                   Container(width: 0,),
-                  GestureDetector(
-                    onTap: (){
+                  FlatButton(
+                    onPressed: (){
                       _saveName(textEditingController.text);
                       Navigator.of(context).pushReplacement(
                           MaterialPageRoute(builder: (context) => HomePage()));

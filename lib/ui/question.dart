@@ -47,7 +47,9 @@ class _QuestionPageState extends State<QuestionPage> {
         },
       ),
       ReasonPage(controller, mood),
-      Carousel(pageController: controller,),
+      Carousel(
+        pageController: controller,
+      ),
       SavePage(controller),
       AdvertisePage(),
     ];
@@ -115,8 +117,8 @@ class _QuestionPageState extends State<QuestionPage> {
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: <Widget>[
-                            GestureDetector(
-                                onTap: () {
+                            IconButton(
+                                onPressed: () {
                                   if (controller.page > 0)
                                     controller.previousPage(
                                         duration: Duration(milliseconds: 950),
@@ -127,12 +129,12 @@ class _QuestionPageState extends State<QuestionPage> {
                                     });
                                   }
                                 },
-                                child: Icon(
+                                icon: Icon(
                                   Icons.keyboard_arrow_up,
                                   size: 42,
                                 )),
-                            GestureDetector(
-                              onTap: () {
+                            IconButton(
+                              onPressed: () {
                                 if (controller.page < list.length) {
                                   controller.nextPage(
                                       duration: Duration(milliseconds: 950),
@@ -144,7 +146,7 @@ class _QuestionPageState extends State<QuestionPage> {
                                   });
                                 }
                               },
-                              child: Icon(
+                              icon: Icon(
                                 Icons.keyboard_arrow_down,
                                 size: 42,
                               ),

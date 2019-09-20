@@ -93,8 +93,8 @@ class _DatePageState extends State<DatePage> {
             Expanded(
               child: Container(),
             ),
-            GestureDetector(
-              onTap: widget.onTap,
+            FlatButton(
+              onPressed: widget.onTap,
               child: Container(
                 height: 55,
                 child: Container(
