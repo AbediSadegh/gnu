@@ -50,9 +50,9 @@ class MenuScreen extends StatelessWidget{
             children: options.map((item) {
               return ListTile(
                 onTap: (){
-                  Navigator.of(context).push(MaterialPageRoute(builder: (context){
-                    return AdvertisePage();
-                  }));
+//                  Navigator.of(context).push(MaterialPageRoute(builder: (context){
+//                    return AdvertisePage();
+//                  }));
                 },
                 leading: Icon(item.icon, color: Colors.white, size: 20,),
                 title: Text(item.title,

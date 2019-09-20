@@ -32,7 +32,7 @@ class Launcher extends StatelessWidget {
           ),
           iconTheme: IconThemeData(color: Color(0xffdfe5ee), size: 55.0),
         ),
-        home: HomePage(),
+        home: FirstPage(),
       ),
     );
   }

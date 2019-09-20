@@ -6,7 +6,11 @@ import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
 
 class SavePage extends StatefulWidget {
-  @override
+ PageController controller;
+
+ SavePage(this.controller);
+
+ @override
   _SavePageState createState() => _SavePageState();
 }
 
@@ -77,9 +81,7 @@ class _SavePageState extends State<SavePage> {
               GestureDetector(
 
                 onTap: () {
-
-                  Navigator.pop(context);
-
+                  widget.controller.nextPage(duration: Duration(milliseconds: 550), curve: Curves.linear);
                 },
                 child: Container(
                   height: 55,

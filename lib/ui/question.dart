@@ -8,6 +8,8 @@ import 'package:gnu/widgets/date_page.dart';
 import 'package:gnu/widgets/gnu_slider.dart';
 import 'package:provider/provider.dart';
 
+import 'advertise_page.dart';
+
 class QuestionPage extends StatefulWidget {
   @override
   _QuestionPageState createState() => _QuestionPageState();
@@ -46,7 +48,8 @@ class _QuestionPageState extends State<QuestionPage> {
       ),
       ReasonPage(controller, mood),
       Carousel(pageController: controller,),
-      SavePage(),
+      SavePage(controller),
+      AdvertisePage(),
     ];
     return Directionality(
       textDirection: TextDirection.rtl,
