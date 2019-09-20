@@ -114,9 +114,7 @@ class _HomeState extends State<Home> {
           date: null,
           moodIcon: null,
           onPressed: () {
-
             Navigator.of(context).push(ScaleRoute(page: QuestionPage()));
-
           },
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -150,6 +148,7 @@ class _HomeState extends State<Home> {
           color: Theme.of(context).primaryColor,
         ),
         HomeCard(
+          title: 'یه روز شلوغ در شهر',
           date: '1398/11/5',
           moodIcon: FontAwesomeIcons.angry,
           onPressed: () {
@@ -166,7 +165,20 @@ class _HomeState extends State<Home> {
           ),
         ),
         HomeCard(
+          date: null,
+          moodIcon: null,
+          title: 'تبلیغات',
+          onPressed: () {},
+          child: Container(
+            child: Image.asset(
+              'asset/ad.jpg',
+              fit: BoxFit.fill,
+            ),
+          ),
+        ),
+        HomeCard(
           date: '1398/12/3',
+          title: 'یه روز آروم',
           moodIcon: FontAwesomeIcons.smile,
           onPressed: () {
             Navigator.of(context).push(ScaleRoute(
@@ -183,6 +195,7 @@ class _HomeState extends State<Home> {
         ),
         HomeCard(
           date: '1398/12/5',
+          title: 'یه روز غمناک',
           moodIcon: FontAwesomeIcons.frown,
           onPressed: () {
             Navigator.of(context).push(ScaleRoute(
@@ -206,7 +219,7 @@ class _HomeState extends State<Home> {
           date: null,
           moodIcon: null,
           onPressed: () {
-            Timer(Duration(milliseconds: 500),(){
+            Timer(Duration(milliseconds: 500), () {
               setState(() {
                 firstRun = false;
                 _firstRunLocalVar = false;
@@ -288,13 +301,15 @@ class HomeCard extends StatelessWidget {
   final VoidCallback onPressed;
   final IconData moodIcon;
   final String date;
+  final String title;
 
   HomeCard(
       {this.child,
       this.color,
       this.onPressed,
       @required this.moodIcon,
-      @required this.date});
+      @required this.date,
+      this.title});
 
   @override
   Widget build(BuildContext context) {
@@ -321,24 +336,38 @@ class HomeCard extends StatelessWidget {
                 width: MediaQuery.of(context).size.width * 0.55,
                 alignment: Alignment.centerLeft,
                 height: 60.0,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
+                child: Row(
                   children: <Widget>[
-                    this.date != null
-                        ? Text(
-                            this.date,
-                            style: TextStyle(color: Colors.white),
-                          )
-                        : Container(),
-                    this.moodIcon != null
-                        ? Icon(
-                            this.moodIcon,
-                            color: Colors.white,
-                            size: 25.0,
-                          )
-                        : Container(),
+                    Expanded(
+                      flex: 2,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          this.date != null
+                              ? Text(
+                                  this.date,
+                                  style: TextStyle(color: Colors.white),
+                                )
+                              : Container(),
+                          this.moodIcon != null
+                              ? Icon(
+                                  this.moodIcon,
+                                  color: Colors.white,
+                                  size: 25.0,
+                                )
+                              : Container(),
 //                    (, style: TextStyle(color: Colors.white),),
+                        ],
+                      ),
+                    ),
+                    this.title == null
+                        ? Container()
+                        : Text(
+                            this.title,
+                            style:
+                                TextStyle(color: Colors.white, fontSize: 12.5),
+                          ),
                   ],
                 ),
                 color: Colors.transparent,

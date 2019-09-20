@@ -55,6 +55,8 @@ flutter:
     - asset/photo-1.jpg
     - asset/photo-2.jpg
     - asset/photo-3.jpg
+    - asset/ad.jpg
+    - asset/load.gif
 
 #    - images/a_dot_ham.jpeg
 
