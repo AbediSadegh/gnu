@@ -3,6 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class DatePage extends StatefulWidget {
+  final onTap;
+
+  DatePage({this.onTap});
+
   @override
   _DatePageState createState() => _DatePageState();
 }
@@ -38,37 +42,71 @@ class _DatePageState extends State<DatePage> {
   Widget build(BuildContext context) {
     return Center(
       child: Stack(alignment: Alignment.center, children: <Widget>[
-        Text(
-          'LOL',
-          style: TextStyle(fontSize: 50.0,color: Color(0xffeeeeeedd)),
-        ),
         Column(
           crossAxisAlignment: CrossAxisAlignment.center,
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
+            SizedBox(height: MediaQuery.of(context).size.height * .35,),
             new Text(
-              'خیلی خب این داستانت کی اتفاق افتاد',
+              'بسیار خب نام یا شروع\n کنیم پایش جدید رو!',
+              style: TextStyle(fontSize: 18),
             ),
             new SizedBox(
-              height: MediaQuery.of(context).size.height * 0.15,
+              height: MediaQuery.of(context).size.height * 0.10,
             ),
-            FlatButton(
-              onPressed: () {
-                Future<DateTime> time = showDatePicker(
-                    context: context,
-                    initialDate: DateTime.now(),
-                    firstDate: DateTime(1970),
-                    lastDate: DateTime(2070));
-                time.then((date) {
-                  this.month = months[date.month];
-                  this.day = date.day + 1;
-                });
-              },
-              child: Text(
-                '${this.month} ${this.day}',
-                style: TextStyle(fontSize: 35.0, color: Color(0xffadd7d3)),
+            Stack(
+              alignment: Alignment.bottomCenter,
+              children: <Widget>[
+                Text("انتخاب زمان", style: TextStyle(fontSize: 65,color: Colors.white.withOpacity(.2),fontFamily: "Iranyekan"),),
+
+                FlatButton(
+
+                  onPressed: () {
+                    Future<DateTime> time = showDatePicker(
+                        context: context,
+                        initialDate: DateTime.now(),
+                        firstDate: DateTime(1970),
+                        lastDate: DateTime(2070));
+                    time.then((date) {
+                      this.month = months[date.month];
+                      this.day = date.day + 1;
+                    });
+                  },
+                  child: Text(
+                    '${this.month} ${this.day}',
+                    style: TextStyle(fontSize: 35.0, color: Colors.white),
+                  ),
+                ),
+              ],
+            ),
+            Text(
+              "امروز"
+            ),
+            Expanded(
+              child: Container(),
+            ),
+            GestureDetector(
+              onTap: widget.onTap,
+              child: Container(
+                height: 55,
+                child: Container(
+                  child: Center(
+                    child: Text(
+                      "ادامه دادن",
+                      style: TextStyle(color: Theme.of(context).primaryColor,fontSize: 20),
+                    ),
+                  ),
+                  width: MediaQuery.of(context).size.width * .6,
+                  height: 55,
+                  decoration: ShapeDecoration(
+                      color: Colors.white,
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(45))),
+                ),
               ),
             ),
+            SizedBox(height: 25,),
+
           ],
         ),
       ]),

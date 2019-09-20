@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gnu/ui/first_page/reason.dart';
+import 'package:gnu/ui/save_page.dart';
 import 'package:gnu/widgets/carousle.dart';
 import 'package:gnu/widgets/date_page.dart';
 import 'package:gnu/widgets/gnu_slider.dart';
@@ -24,14 +25,36 @@ class _QuestionPageState extends State<QuestionPage> {
     super.initState();
     controller = PageController();
   }
-
+  String mood = "خوب تقریبا بوده باشه";
   @override
   Widget build(BuildContext context) {
+
     List<Widget> list = [
-      DatePage(),
-      GnuSlider(),
+      DatePage(
+        onTap: (){
+          controller.nextPage(duration: Duration(milliseconds: 550), curve: Curves.linear);
+          setState(() {
+            isFirstPage = false;
+          });
+          },),
+      GnuSlider(
+          onTap: (){controller.nextPage(duration: Duration(milliseconds: 550), curve: Curves.linear);},
+          onChange:(int index){
+        List<String> moods = [
+          'خیلی بد بوده باشه',
+          'تقریبا بد بوده باشه',
+          'خوب تقریبا بوده باشه',
+          'خیلی خوب بوده باشه',
+        ];
+        setState(() {
+          mood = moods[index];
+        });
+        controller.nextPage(duration: Duration(milliseconds: 550), curve: Curves.linear);
+      }),
+      ReasonPage(controller,mood),
       Carousel(),
-      ReasonPage(controller),
+      SavePage(),
+
     ];
     return Directionality(
       textDirection: TextDirection.rtl,

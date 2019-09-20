@@ -4,8 +4,9 @@ import 'package:gnu/ui/home_page.dart';
 
 class GnuSlider extends StatefulWidget {
   final ValueChanged<int> onChange;
+  final onTap;
 
-  GnuSlider({this.onChange});
+  GnuSlider({this.onChange,this.onTap});
 
   @override
   _GnuSliderState createState() => _GnuSliderState();
@@ -92,12 +93,7 @@ class _GnuSliderState extends State<GnuSlider> {
         ),
         Expanded(child: Container(),),
         GestureDetector(
-          onTap: (){
-//            _saveName(textEditingController.text);
-                    Navigator.of(context).pushReplacement(
-                        MaterialPageRoute(builder: (context) => HomePage()));
-//            widget.controller.nextPage(duration: Duration(milliseconds: 550), curve: Curves.linear);
-          },
+          onTap: widget.onTap,
           child: Container(
             height: 55,
             child: Opacity(
