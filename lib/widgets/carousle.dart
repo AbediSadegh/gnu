@@ -117,11 +117,14 @@ class _CarouselState extends State<Carousel> {
            crossAxisAlignment: CrossAxisAlignment.center,
            children: <Widget>[
              Container(width: double.maxFinite,),
-             FlatButton(
-               shape: RoundedRectangleBorder(borderRadius: BorderRadius.all(Radius.circular(45))),
+             RaisedButton(
+               padding: EdgeInsets.all(0.0),
+               shape: RoundedRectangleBorder(
+                   borderRadius: BorderRadius.circular(45)),
                color: Colors.white,
                child: Container(
-                   width: MediaQuery.of(context).size.width *0.5,
+                   width: MediaQuery.of(context).size.width *0.6,
+                   height: 55.0,
                    child: Center(child: Text("ادامه",style: TextStyle(color: Theme.of(context).primaryColor),))),
                onPressed: (){
                  widget.pageController.nextPage(duration: Duration(milliseconds: 500), curve: Curves.linear);

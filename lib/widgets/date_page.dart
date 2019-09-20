@@ -4,6 +4,8 @@ import 'package:gnu/entities/story.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
+import '../main.dart';
+
 class DatePage extends StatefulWidget {
   final onTap;
 
@@ -52,7 +54,7 @@ class _DatePageState extends State<DatePage> {
               height: MediaQuery.of(context).size.height * .35,
             ),
             new Text(
-              'بسیار خب نام یا شروع\n کنیم پایش جدید رو!',
+              'بسیار خب ${Provider.of<Name>(context).name}بیا شروع\n کنیم پایش جدید رو!',
               style: TextStyle(fontSize: 18),
             ),
             new SizedBox(
@@ -93,7 +95,10 @@ class _DatePageState extends State<DatePage> {
             Expanded(
               child: Container(),
             ),
-            FlatButton(
+            RaisedButton(
+              padding: EdgeInsets.all(0.0),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(45)),
               onPressed: widget.onTap,
               child: Container(
                 height: 55,

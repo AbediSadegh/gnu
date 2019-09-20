@@ -122,7 +122,7 @@ class _GnuSliderState extends State<GnuSlider> {
                       child: new Text('روزت رو بسنج'),
 //                  width: MediaQuery.of(context).size.width * 0.6,
                     ),
-                    new Text(moods[_slider.toInt()]),
+                    new Text(_hasChanged?moods[_slider.toInt()]:'???'),
                   ],
                 ),
               ),
@@ -130,8 +130,11 @@ class _GnuSliderState extends State<GnuSlider> {
             Expanded(
               child: Container(),
             ),
-            FlatButton(
-              onPressed: widget.onTap,
+            RaisedButton(
+              padding: EdgeInsets.all(0.0),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(45)),
+              onPressed:_hasChanged? widget.onTap:null,
               child: Container(
                 height: 55,
                 child: Opacity(

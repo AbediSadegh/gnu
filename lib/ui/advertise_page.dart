@@ -213,14 +213,16 @@ class AdvertisePage extends StatelessWidget {
                   Expanded(
                     child: Container(),
                   ),
-                  FlatButton(
+                  RaisedButton(
+                    padding: EdgeInsets.all(0.0),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(45)),
                     color: Colors.white,
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(45)),
                     onPressed: (){
                       Navigator.pop(context);
                     },
                     child: Container(
-                      height: 45,
+                      height: 55.0,
                       width: MediaQuery.of(context).size.width *.6,child: Center(child: Text("اتمام",style: TextStyle(color: Theme.of(context).primaryColor,fontSize: 20),)),),
                   ),
                 ],

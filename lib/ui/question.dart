@@ -26,7 +26,7 @@ class _QuestionPageState extends State<QuestionPage> {
     controller = PageController();
   }
 
-  String mood = "خوب تقریبا بوده باشه";
+  String mood = "تقریبا خوب بوده باشه";
 
   @override
   Widget build(BuildContext context) {

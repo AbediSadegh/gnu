@@ -6,7 +6,10 @@ import 'package:gnu/widgets/home.dart';
 import 'package:gnu/widgets/menu_screen.dart';
 import 'package:gnu/widgets/zoom_scaffold.dart';
 import 'package:hidden_drawer_menu/hidden_drawer/hidden_drawer_menu.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../main.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -80,7 +83,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   Column _buildBottomNavigation() {
-    String str2 = ' من خیلی هیجان زده‌ام برای شروع این ماجرا کنار هم، مهدی';
+    String str2 = ' من خیلی هیجان زده‌ام برای شروع این ماجرا کنار هم، ${Provider.of<Name>(context).name}';
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: <Widget>[

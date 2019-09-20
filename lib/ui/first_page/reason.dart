@@ -87,12 +87,13 @@ class ReasonPage extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: <Widget>[
-              FlatButton(
+              RaisedButton(
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.all(Radius.circular(45))),
                 color: Colors.white,
                 child: Container(
-                    width: MediaQuery.of(context).size.width * 0.5,
+                    width: MediaQuery.of(context).size.width * 0.6,
+                    height: 55.0,
                     child: Center(
                         child: Text(
                       "ادامه",

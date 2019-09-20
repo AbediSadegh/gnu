@@ -5,6 +5,8 @@ import 'package:gnu/entities/story.dart';
 import 'package:provider/provider.dart';
 import 'package:http/http.dart' as http;
 
+import '../main.dart';
+
 class SavePage extends StatefulWidget {
  PageController controller;
 
@@ -47,7 +49,7 @@ class _SavePageState extends State<SavePage> {
                     Container(
                       width: MediaQuery.of(context).size.width* 0.6,
                       child: Text(
-                        "کارت خوب بود،مهدی میخوای یک اسم به امروزت بدی",
+                        "کارت خوب بود،${Provider.of<Name>(context).name} میخوای یک اسم به امروزت بدی",
                         style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),
                         textAlign: TextAlign.start,
                       ),
@@ -78,7 +80,10 @@ class _SavePageState extends State<SavePage> {
               Expanded(
                 child: Container(),
               ),
-              FlatButton(
+              RaisedButton(
+                padding: EdgeInsets.all(0.0),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(45)),
                 onPressed: () {
                   widget.controller.nextPage(duration: Duration(milliseconds: 550), curve: Curves.linear);
                 },
@@ -96,7 +101,7 @@ class _SavePageState extends State<SavePage> {
                           ),
                         ),
                         width: MediaQuery.of(context).size.width * .6,
-                        height: 55,
+                        height: 55.0,
                         decoration: ShapeDecoration(
                             color: Colors.white,
                             shape: RoundedRectangleBorder(

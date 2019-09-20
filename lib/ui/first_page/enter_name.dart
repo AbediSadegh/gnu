@@ -1,8 +1,10 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../main.dart';
 import '../home_page.dart';
 
 class NamePage extends StatefulWidget {
@@ -116,9 +118,14 @@ class _NamePageState extends State<NamePage> {
                   Container(
                     width: 0,
                   ),
-                  FlatButton(
+                  RaisedButton(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(45)),
+                    padding: EdgeInsets.all(0.0),
                     onPressed: () {
                       _saveName(textEditingController.text);
+                      if(textEditingController.text.isNotEmpty)
+                        Provider.of<Name>(context).name=  textEditingController.text;
                       Navigator.of(context).pushReplacement(
                           MaterialPageRoute(builder: (context) => HomePage()));
 //                  widget.controller.nextPage(duration: Duration(milliseconds: 550), curve: Curves.linear);

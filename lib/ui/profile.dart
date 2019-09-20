@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:gnu/main.dart';
+import 'package:provider/provider.dart';
 
 class Profile extends StatelessWidget {
   @override
@@ -37,7 +39,7 @@ class Profile extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.only(left: 16.0, bottom: 5),
                       child: Text(
-                        "مهدی",
+                        Provider.of<Name>(context).name,
                         style: TextStyle(color: Colors.black, fontSize: 20),
                       ),
                     ),
