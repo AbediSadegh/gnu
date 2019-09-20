@@ -17,12 +17,29 @@ class Home extends StatefulWidget {
   _HomeState createState() => _HomeState();
 }
 
-int _page = 0;
+
 
 class _HomeState extends State<Home> {
+  bool _firstRunLocalVar;
+  static bool firstRun = true;
+  int _page = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    this._firstRunLocalVar = _HomeState.firstRun;
+    if (firstRun) _HomeState.firstRun = false;
+  }
+
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return _firstRunLocalVar ?
+        Scaffold(
+          backgroundColor: Color(0xfff4f4f4),
+          body: body(),
+        )
+        : Scaffold(
       backgroundColor: Color(0xfff4f4f4),
       bottomNavigationBar: CurvedNavigationBar(
         color: Theme.of(context).primaryColor,
@@ -33,14 +50,14 @@ class _HomeState extends State<Home> {
             Icons.home,
             size: 36,
           ),
-          Icon(
+          !_firstRunLocalVar ? Icon(
             Icons.show_chart,
             size: 36,
-          ),
-          Icon(
+          ) : null,
+          !_firstRunLocalVar ? Icon(
             Icons.person,
             size: 36,
-          )
+          ): null,
         ],
         onTap: (i) {
           setState(() {
@@ -48,130 +65,184 @@ class _HomeState extends State<Home> {
           });
         },
       ),
-      body: (_page == 0)
-          ? Container(
-              child: Center(
-              child: Directionality(
-                textDirection: TextDirection.ltr,
-                child: CarouselSlider(
-                  enlargeCenterPage: true,
-                  aspectRatio: 0.9,
-                  reverse: false,
-                  initialPage: 0,
-                  enableInfiniteScroll: false,
-                  items: <Widget>[
-                    HomeCard(
-                      date: null,
-                      moodIcon: null,
-                      onPressed: () {
-                        Navigator.of(context)
-                            .push(ScaleRoute(page: QuestionPage()));
-                      },
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: <Widget>[
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: <Widget>[
-                              Icon(
-                                Icons.add,
-                                color: Colors.white,
-                                size: 35,
-                              ),
-                              SizedBox(
-                                height: 5.0,
-                              ),
-                              Icon(
-                                Icons.edit,
-                                color: Colors.white,
-                              ),
-                            ],
-                          ),
-                          SizedBox(
-                            height: 5.0,
-                          ),
-                          Text(
-                            'شروع پایش جدید',
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        ],
-                      ),
-                      color: Theme.of(context).primaryColor,
-                    ),
-                    HomeCard(
-                      date: '1398/11/5',
-                      moodIcon: FontAwesomeIcons.angry,
-                      onPressed: () {
-                        Navigator.of(context).push(ScaleRoute(
-                            page: StoryDetail(
-                          imgSrc: 'asset/photo-1.jpg',
-                        )));
-                      },
-                      child: Container(
-                        child: Image.asset(
-                          'asset/photo-1.jpg',
-                          fit: BoxFit.fill,
-                        ),
-                      ),
-                    ),
-                    HomeCard(
-                      date: '1398/12/3',
-                      moodIcon: FontAwesomeIcons.smile,
-                      onPressed: () {
-                        Navigator.of(context).push(ScaleRoute(
-                            page: StoryDetail(
-                          imgSrc: 'asset/photo-2.jpg',
-                        )));
-                      },
-                      child: Container(
-                        child: Image.asset(
-                          'asset/photo-2.jpg',
-                          fit: BoxFit.fill,
-                        ),
-                      ),
-                    ),
-                    HomeCard(
-                      date: '1398/12/5',
-                      moodIcon: FontAwesomeIcons.frown,
-                      onPressed: () {
-                        Navigator.of(context).push(ScaleRoute(
-                            page: StoryDetail(
-                          imgSrc: 'asset/photo-3.jpg',
-                        )));
-                      },
-                      child: Container(
-                        width: double.maxFinite,
-                        height: double.maxFinite,
-                        child: Image.asset(
-                          'asset/photo-3.jpg',
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ))
-          : (_page == 1)
-              ? Padding(
-                  padding: EdgeInsets.all(6),
-                  child: ListView(
-                    children: [
-                      LineChartSample2(),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      PieChartSample2(),
-                      SizedBox(
-                        height: 10,
-                      ),
-                      BarChartSample1()
-                    ],
-                  ))
-              : Container(),
+      body: body(),
     );
   }
+  Widget body(){
+    return (_page == 0)
+        ? Container(
+        child: Center(
+          child: Directionality(
+            textDirection: TextDirection.ltr,
+            child: CarouselSlider(
+              enlargeCenterPage: true,
+              aspectRatio: 0.9,
+              reverse: false,
+              initialPage: 0,
+              enableInfiniteScroll: false,
+              items: _getItems(),
+            ),
+          ),
+        ))
+        : (_page == 1)
+        ? Padding(
+      padding: EdgeInsets.all(6),
+      child: ListView(
+        children: [
+          LineChartSample2(),
+          SizedBox(
+            height: 10,
+          ),
+          PieChartSample2(),
+          SizedBox(
+            height: 10,
+          ),
+          BarChartSample1()
+        ],
+      ),)
+        : Container();
+  }
+
+  List<Widget> _getItems(){
+    if (!_firstRunLocalVar){
+      return <Widget>[
+        HomeCard(
+          date: null,
+          moodIcon: null,
+          onPressed: () {
+            Navigator.of(context)
+                .push(ScaleRoute(page: QuestionPage()));
+          },
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Icon(
+                    Icons.add,
+                    color: Colors.white,
+                    size: 35,
+                  ),
+                  SizedBox(
+                    height: 5.0,
+                  ),
+                  Icon(
+                    Icons.edit,
+                    color: Colors.white,
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 5.0,
+              ),
+              Text(
+                'شروع پایش جدید',
+                style: TextStyle(color: Colors.white),
+              ),
+            ],
+          ),
+          color: Theme
+              .of(context)
+              .primaryColor,
+        ),
+        HomeCard(
+          date: '1398/11/5',
+          moodIcon: FontAwesomeIcons.angry,
+          onPressed: () {
+            Navigator.of(context).push(ScaleRoute(
+                page: StoryDetail(
+                  imgSrc: 'asset/photo-1.jpg',
+                )));
+          },
+          child: Container(
+            child: Image.asset(
+              'asset/photo-1.jpg',
+              fit: BoxFit.fill,
+            ),
+          ),
+        ),
+        HomeCard(
+          date: '1398/12/3',
+          moodIcon: FontAwesomeIcons.smile,
+          onPressed: () {
+            Navigator.of(context).push(ScaleRoute(
+                page: StoryDetail(
+                  imgSrc: 'asset/photo-2.jpg',
+                )));
+          },
+          child: Container(
+            child: Image.asset(
+              'asset/photo-2.jpg',
+              fit: BoxFit.fill,
+            ),
+          ),
+        ),
+        HomeCard(
+          date: '1398/12/5',
+          moodIcon: FontAwesomeIcons.frown,
+          onPressed: () {
+            Navigator.of(context).push(ScaleRoute(
+                page: StoryDetail(
+                  imgSrc: 'asset/photo-3.jpg',
+                )));
+          },
+          child: Container(
+            width: double.maxFinite,
+            height: double.maxFinite,
+            child: Image.asset(
+              'asset/photo-3.jpg',
+              fit: BoxFit.cover,
+            ),
+          ),
+        ),
+      ];
+    }else {
+      return <Widget>[
+        HomeCard(
+          date: null,
+          moodIcon: null,
+          onPressed: () {
+            Navigator.of(context)
+                .push(ScaleRoute(page: QuestionPage()));
+          },
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget>[
+                  Icon(
+                    Icons.add,
+                    color: Colors.white,
+                    size: 35,
+                  ),
+                  SizedBox(
+                    height: 5.0,
+                  ),
+                  Icon(
+                    Icons.edit,
+                    color: Colors.white,
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: 5.0,
+              ),
+              Text(
+                'شروع پایش جدید',
+                style: TextStyle(color: Colors.white),
+              ),
+            ],
+          ),
+          color: Theme.of(context).primaryColor,
+        ),
+      ];
+    }
+  }
 }
+
+
 
 class ScaleRoute extends PageRouteBuilder {
   final Widget page;
@@ -258,7 +329,7 @@ class HomeCard extends StatelessWidget {
                         ? Icon(
                             this.moodIcon,
                             color: Colors.white,
-                      size: 25.0,
+                            size: 25.0,
                           )
                         : Container(),
 //                    (, style: TextStyle(color: Colors.white),),

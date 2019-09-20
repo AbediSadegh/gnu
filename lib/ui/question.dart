@@ -25,35 +25,30 @@ class _QuestionPageState extends State<QuestionPage> {
     super.initState();
     controller = PageController();
   }
+
   String mood = "خوب تقریبا بوده باشه";
+
   @override
   Widget build(BuildContext context) {
-
     List<Widget> list = [
       DatePage(
-        onTap: (){
-          controller.nextPage(duration: Duration(milliseconds: 550), curve: Curves.linear);
+        onTap: () {
+          controller.nextPage(
+              duration: Duration(milliseconds: 550), curve: Curves.linear);
           setState(() {
             isFirstPage = false;
           });
-          },),
+        },
+      ),
       GnuSlider(
-          onTap: (){controller.nextPage(duration: Duration(milliseconds: 550), curve: Curves.linear);},
-          onChange:(int index){
-        List<String> moods = [
-          'خیلی بد بوده باشه',
-          'تقریبا بد بوده باشه',
-          'خوب تقریبا بوده باشه',
-          'خیلی خوب بوده باشه',
-        ];
-        setState(() {
-          mood = moods[index];
-        });
-      }),
-      ReasonPage(controller,mood),
+        onTap: () {
+          controller.nextPage(
+              duration: Duration(milliseconds: 550), curve: Curves.linear);
+        },
+      ),
+      ReasonPage(controller, mood),
       Carousel(),
       SavePage(),
-
     ];
     return Directionality(
       textDirection: TextDirection.rtl,
@@ -90,12 +85,12 @@ class _QuestionPageState extends State<QuestionPage> {
               height: double.maxFinite,
               child: WillPopScope(
                 onWillPop: () {
-                  if(controller.page == 0.0){
+                  if (controller.page == 0.0) {
                     Navigator.pop(context);
-                  }else
-                  controller.previousPage(
-                      duration: Duration(milliseconds: 250),
-                      curve: Curves.linear);
+                  } else
+                    controller.previousPage(
+                        duration: Duration(milliseconds: 250),
+                        curve: Curves.linear);
                   if (controller.page == 1.0) {
                     setState(() {
                       isFirstPage = true;
@@ -125,7 +120,7 @@ class _QuestionPageState extends State<QuestionPage> {
                                     controller.previousPage(
                                         duration: Duration(milliseconds: 950),
                                         curve: Curves.linear);
-                                  if (controller.page -1  == 0.0) {
+                                  if (controller.page - 1 == 0.0) {
                                     setState(() {
                                       isFirstPage = true;
                                     });
@@ -137,11 +132,12 @@ class _QuestionPageState extends State<QuestionPage> {
                                 )),
                             GestureDetector(
                               onTap: () {
-                                if (controller.page < list.length){
+                                if (controller.page < list.length) {
                                   controller.nextPage(
                                       duration: Duration(milliseconds: 950),
-                                      curve: Curves.linear);}
-                                if (controller.page+1 == 1.0) {
+                                      curve: Curves.linear);
+                                }
+                                if (controller.page + 1 == 1.0) {
                                   setState(() {
                                     isFirstPage = false;
                                   });
