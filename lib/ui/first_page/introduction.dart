@@ -63,7 +63,7 @@ class _IntroductionState extends State<Introduction> {
               child: Column(
                 children: <Widget>[
                   Text(
-                    "سلام عزیزم،",
+                    "سلام،",
                     style: TextStyle(
                         fontSize: 28,
                         color: Colors.white,

@@ -50,8 +50,11 @@ class _QuestionPageState extends State<QuestionPage> {
         setState(() {
           mood = moods[index];
         });
+<<<<<<< HEAD
         controller.nextPage(
             duration: Duration(milliseconds: 550), curve: Curves.linear);
+=======
+>>>>>>> b4942c707e154228fec3ba52c5f573c00163fd3e
       }),
       ReasonPage(controller, mood),
       Carousel(),

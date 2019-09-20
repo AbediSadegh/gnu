@@ -1,10 +1,12 @@
 import 'dart:async';
+import 'dart:ui' as prefix0;
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:gnu/ui/question.dart';
 
 import 'package:fl_chart/fl_chart.dart';
@@ -59,11 +61,13 @@ class _HomeState extends State<Home> {
                   enableInfiniteScroll: false,
                   items: <Widget>[
                     HomeCard(
+                      date: null,
+                      moodIcon: null,
                       onPressed: () {
                         Navigator.of(context)
                             .push(ScaleRoute(page: QuestionPage()));
                       },
-                          child: Column(
+                      child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           Row(
@@ -73,8 +77,8 @@ class _HomeState extends State<Home> {
                                 Icons.add,
                                 color: Colors.white,
                                 size: 35,
-
-                              ),SizedBox(
+                              ),
+                              SizedBox(
                                 height: 5.0,
                               ),
                               Icon(
@@ -95,9 +99,13 @@ class _HomeState extends State<Home> {
                       color: Theme.of(context).primaryColor,
                     ),
                     HomeCard(
+                      date: '1398/11/5',
+                      moodIcon: FontAwesomeIcons.angry,
                       onPressed: () {
-                        Navigator.of(context)
-                            .push(ScaleRoute(page: StoryDetail(imgSrc: 'asset/photo-1.jpg',)));
+                        Navigator.of(context).push(ScaleRoute(
+                            page: StoryDetail(
+                          imgSrc: 'asset/photo-1.jpg',
+                        )));
                       },
                       child: Container(
                         child: Image.asset(
@@ -107,9 +115,13 @@ class _HomeState extends State<Home> {
                       ),
                     ),
                     HomeCard(
+                      date: '1398/12/3',
+                      moodIcon: FontAwesomeIcons.smile,
                       onPressed: () {
-                        Navigator.of(context)
-                            .push(ScaleRoute(page: StoryDetail(imgSrc: 'asset/photo-2.jpg',)));
+                        Navigator.of(context).push(ScaleRoute(
+                            page: StoryDetail(
+                          imgSrc: 'asset/photo-2.jpg',
+                        )));
                       },
                       child: Container(
                         child: Image.asset(
@@ -119,9 +131,13 @@ class _HomeState extends State<Home> {
                       ),
                     ),
                     HomeCard(
+                      date: '1398/12/5',
+                      moodIcon: FontAwesomeIcons.frown,
                       onPressed: () {
-                        Navigator.of(context)
-                            .push(ScaleRoute(page: StoryDetail(imgSrc: 'asset/photo-3.jpg',)));
+                        Navigator.of(context).push(ScaleRoute(
+                            page: StoryDetail(
+                          imgSrc: 'asset/photo-3.jpg',
+                        )));
                       },
                       child: Container(
                         width: double.maxFinite,
@@ -140,14 +156,16 @@ class _HomeState extends State<Home> {
               ? Padding(
                   padding: EdgeInsets.all(6),
                   child: ListView(
-                    children: [LineChartSample2(), SizedBox(
+                    children: [
+                      LineChartSample2(),
+                      SizedBox(
                         height: 10,
                       ),
                       PieChartSample2(),
                       SizedBox(
                         height: 10,
                       ),
-                    BarChartSample1()
+                      BarChartSample1()
                     ],
                   ))
               : Container(),
@@ -191,8 +209,15 @@ class HomeCard extends StatelessWidget {
   final Widget child;
   final Color color;
   final VoidCallback onPressed;
+  final IconData moodIcon;
+  final String date;
 
-  HomeCard({this.child, this.color, this.onPressed});
+  HomeCard(
+      {this.child,
+      this.color,
+      this.onPressed,
+      @required this.moodIcon,
+      @required this.date});
 
   @override
   Widget build(BuildContext context) {
@@ -206,10 +231,49 @@ class HomeCard extends StatelessWidget {
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
           padding: EdgeInsets.all(0.0),
           onPressed: this.onPressed,
-          child: SizedBox(
-            width: MediaQuery.of(context).size.width * 0.65,
-            height: MediaQuery.of(context).size.height * 0.85,
-            child: this.child != null ? this.child : Container(),
+          child: Stack(
+            alignment: Alignment.bottomCenter,
+            fit: StackFit.loose,
+            children: <Widget>[
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 0.65,
+                height: MediaQuery.of(context).size.height * 0.85,
+                child: this.child != null ? this.child : Container(),
+              ),
+              Container(
+                width: MediaQuery.of(context).size.width * 0.55,
+                alignment: Alignment.centerLeft,
+                height: 60.0,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    this.date != null
+                        ? Text(
+                            this.date,
+                            style: TextStyle(color: Colors.white),
+                          )
+                        : Container(),
+                    this.moodIcon != null
+                        ? Icon(
+                            this.moodIcon,
+                            color: Colors.white,
+                      size: 25.0,
+                          )
+                        : Container(),
+//                    (, style: TextStyle(color: Colors.white),),
+                  ],
+                ),
+                color: Colors.transparent,
+//                  decoration: BoxDecoration(
+//                    color: Colors.transparent,
+//                      gradient: LinearGradient(
+//                          colors: [Colors.white, Colors.black],
+////                        stops: [0.0, 1.0],
+//                          begin: FractionalOffset.topCenter,
+//                          end: FractionalOffset.bottomCenter)),
+              ),
+            ],
           ),
         ),
         elevation: 4.0,

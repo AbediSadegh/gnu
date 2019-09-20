@@ -67,10 +67,16 @@ class _SavePageState extends State<SavePage> {
                 child: Container(),
               ),
               GestureDetector(
+<<<<<<< HEAD
                 onTap: () {
                   http.post('http://192.168.1.215:3000/api/story',
                       body: Provider.of<Story>(context).toJson());
                   Navigator.pop(context);
+=======
+                onTap: (){
+                  //todo
+//                  widget.controller.nextPage(duration: Duration(milliseconds: 550), curve: Curves.linear);
+>>>>>>> b4942c707e154228fec3ba52c5f573c00163fd3e
                 },
                 child: Container(
                   height: 55,
