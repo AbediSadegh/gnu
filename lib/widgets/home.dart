@@ -1,10 +1,12 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:gnu/ui/first_page/page_view.dart';
+import 'package:flutter/services.dart';
 import 'package:gnu/ui/question.dart';
 
 import 'package:fl_chart/fl_chart.dart';
+import 'package:gnu/widgets/story_detail.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -18,84 +20,162 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xfff4f4f4),
-        bottomNavigationBar: CurvedNavigationBar(
-          color: Theme.of(context).primaryColor,
-          backgroundColor: Colors.transparent,height: 55,
-          items: <Widget>[
-            Icon(Icons.home,size: 36,),
-            Icon(Icons.show_chart,size: 36,),
-            Icon(Icons.person,size: 36,)
-          ],
-          onTap: (i) {
-            setState(() {
-              _page = i;
-            });
-          },
-        ),
-        body: (_page == 0)
-            ? Container(
-                child: Center(
-                  child: Directionality(
-            textDirection: TextDirection.ltr,
-            child: CarouselSlider(
-              enlargeCenterPage: true,
-              aspectRatio: 0.9,
-              reverse: false,
-              initialPage: 0,
-              enableInfiniteScroll: false,
-              items: <Widget>[
-                HomeCard(
-                  onPressed: () {
-                    Navigator.of(context).push(new MaterialPageRoute(builder: (context){
-                      return QuestionPage();
-                    }));
-                  },
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-
-                      Row(
+      bottomNavigationBar: CurvedNavigationBar(
+        color: Theme.of(context).primaryColor,
+        backgroundColor: Colors.transparent,
+        height: 55,
+        items: <Widget>[
+          Icon(
+            Icons.home,
+            size: 36,
+          ),
+          Icon(
+            Icons.show_chart,
+            size: 36,
+          ),
+          Icon(
+            Icons.person,
+            size: 36,
+          )
+        ],
+        onTap: (i) {
+          setState(() {
+            _page = i;
+          });
+        },
+      ),
+      body: (_page == 0)
+          ? Container(
+              child: Center(
+              child: Directionality(
+                textDirection: TextDirection.ltr,
+                child: CarouselSlider(
+                  enlargeCenterPage: true,
+                  aspectRatio: 0.9,
+                  reverse: false,
+                  initialPage: 0,
+                  enableInfiniteScroll: false,
+                  items: <Widget>[
+                    HomeCard(
+                      onPressed: () {
+                        Navigator.of(context)
+                            .push(ScaleRoute(page: QuestionPage()));
+                      },
+                      child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
-                          Icon(Icons.add, color: Colors.white,size: 35,),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Icon(
+                                Icons.add,
+                                color: Colors.white,
+                                size: 35,
+                              ),
+                              SizedBox(
+                                height: 5.0,
+                              ),
+                              Icon(
+                                Icons.edit,
+                                color: Colors.white,
+                              ),
+                            ],
+                          ),
                           SizedBox(
                             height: 5.0,
                           ),
-                          Icon(Icons.edit,color: Colors.white,),
+                          Text(
+                            'شروع پایش جدید',
+                            style: TextStyle(color: Colors.white),
+                          ),
                         ],
                       ),
-
-                      SizedBox(
-                        height: 5.0,
+                      color: Theme.of(context).primaryColor,
+                    ),
+                    HomeCard(
+                      onPressed: () {
+                        Navigator.of(context)
+                            .push(ScaleRoute(page: StoryDetail(imgSrc: 'asset/photo-1.jpg',)));
+                      },
+                      child: Container(
+                        child: Image.asset(
+                          'asset/photo-1.jpg',
+                          fit: BoxFit.fill,
+                        ),
                       ),
-                      Text('شروع پایش جدید',style: TextStyle(color: Colors.white),
+                    ),
+                    HomeCard(
+                      onPressed: () {
+                        Navigator.of(context)
+                            .push(ScaleRoute(page: StoryDetail(imgSrc: 'asset/photo-2.jpg',)));
+                      },
+                      child: Container(
+                        child: Image.asset(
+                          'asset/photo-2.jpg',
+                          fit: BoxFit.fill,
+                        ),
+                      ),
+                    ),
+                    HomeCard(
+                      onPressed: () {
+                        Navigator.of(context)
+                            .push(ScaleRoute(page: StoryDetail(imgSrc: 'asset/photo-3.jpg',)));
+                      },
+                      child: Container(
+                        width: double.maxFinite,
+                        height: double.maxFinite,
+                        child: Image.asset(
+                          'asset/photo-3.jpg',
+                          fit: BoxFit.cover,
+                        ),
+                      ),
                     ),
                   ],
-                  ),color: Theme.of(context).primaryColor,
                 ),
-                HomeCard(
-                  onPressed: () {},
-                ),
-                HomeCard(
-                  onPressed: () {},
-                ),
-                HomeCard(
-                  onPressed: () {},
-                ),
-              ],
-            ),
-          ),
-        ))
-      : (_page == 1)
-                ? Padding(
-                    padding: EdgeInsets.all(6),
-                    child: Column(
-                      children: [LineChartSample2(), LineChartSample2()],
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    ))
-                : Container(),
+              ),
+            ))
+          : (_page == 1)
+              ? Padding(
+                  padding: EdgeInsets.all(6),
+                  child: Column(
+                    children: [LineChartSample2(), LineChartSample2()],
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  ))
+              : Container(),
     );
   }
+}
+
+class ScaleRoute extends PageRouteBuilder {
+  final Widget page;
+
+  ScaleRoute({this.page})
+      : super(
+          pageBuilder: (
+            BuildContext context,
+            Animation<double> animation,
+            Animation<double> secondaryAnimation,
+          ) =>
+              page,
+          transitionsBuilder: (
+            BuildContext context,
+            Animation<double> animation,
+            Animation<double> secondaryAnimation,
+            Widget child,
+          ) =>
+              ScaleTransition(
+            scale: Tween<double>(
+              begin: 0.0,
+              end: 1.0,
+            ).animate(
+              CurvedAnimation(
+                parent: animation,
+                curve: Curves.fastOutSlowIn,
+              ),
+            ),
+            child: child,
+          ),
+        );
 }
 
 class HomeCard extends StatelessWidget {
@@ -107,19 +187,25 @@ class HomeCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      color: this.color,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-      child: FlatButton(
-        onPressed: this.onPressed,
-        child: SizedBox(
-          width: MediaQuery.of(context).size.width * 0.6,
-          height: MediaQuery.of(context).size.height * 0.85,
-          child: this.child != null ? this.child : Container(),
+    return Center(
+      child: Card(
+        color: this.color,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+        child: FlatButton(
+          clipBehavior: Clip.antiAlias,
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+          padding: EdgeInsets.all(0.0),
+          onPressed: this.onPressed,
+          child: SizedBox(
+            width: MediaQuery.of(context).size.width * 0.65,
+            height: MediaQuery.of(context).size.height * 0.85,
+            child: this.child != null ? this.child : Container(),
+          ),
         ),
+        elevation: 4.0,
+        borderOnForeground: true,
       ),
-      elevation: 4.0,
-      borderOnForeground: true,
     );
   }
 }

@@ -39,55 +39,57 @@ class _FirstPageState extends State<FirstPage> {
 //      ReasonPage(controller),
       NamePage(controller:controller),
     ];
-    return Directionality(
-      textDirection: TextDirection.rtl,
-      child: Scaffold(
-        body: Stack(
-          children: <Widget>[
-            Container(
-              width: double.maxFinite,
-              height: double.maxFinite,
-              decoration: BoxDecoration(
-                  gradient: LinearGradient(colors: [
-                Theme.of(context).primaryColor,
-                Theme.of(context).accentColor
-              ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top:18.0,left: 0),
-              child: AnimatedContainer(
-                padding: EdgeInsets.only(left: isFirstPage ? 0 : 15,top: 12),
-                height: MediaQuery.of(context).size.height*.3,
-                duration: Duration(milliseconds: 900),
-                child: SvgPicture.asset("asset/iconfinder-icon.svg",width: 85,height: 85,),
-                alignment:isFirstPage ?  Alignment.bottomCenter : Alignment.topLeft,
-                curve: Curves.linear,
+    return Hero(
+      tag: 'home',
+      child: Directionality(
+        textDirection: TextDirection.rtl,
+        child: Scaffold(
+          body: Stack(
+            children: <Widget>[
+              Container(
+                width: double.maxFinite,
+                height: double.maxFinite,
+                decoration: BoxDecoration(
+                    gradient: LinearGradient(colors: [
+                  Theme.of(context).primaryColor,
+                  Theme.of(context).accentColor
+                ], begin: Alignment.topCenter, end: Alignment.bottomCenter)),
               ),
-            ),
-            Container(
-              width: double.maxFinite,
-              height: double.maxFinite,
-              child: WillPopScope(
-                onWillPop: () {
-                  controller.previousPage(
-                      duration: Duration(milliseconds: 250),
-                      curve: Curves.linear);
-                  if(controller.page == 1.0){
-                    setState(() {
-                      isFirstPage =true;
-                    });
-                  }
+              Padding(
+                padding: const EdgeInsets.only(top:18.0,left: 0),
+                child: AnimatedContainer(
+                  padding: EdgeInsets.only(left: isFirstPage ? 0 : 15,top: 12),
+                  height: MediaQuery.of(context).size.height*.3,
+                  duration: Duration(milliseconds: 900),
+                  child: SvgPicture.asset("asset/iconfinder-icon.svg",width: 85,height: 85,),
+                  alignment:isFirstPage ?  Alignment.bottomCenter : Alignment.topLeft,
+                  curve: Curves.linear,
+                ),
+              ),
+              Container(
+                width: double.maxFinite,
+                height: double.maxFinite,
+                child: WillPopScope(
+                  onWillPop: () {
+                    controller.previousPage(
+                        duration: Duration(milliseconds: 250),
+                        curve: Curves.linear);
+                    if(controller.page == 1.0){
+                      setState(() {
+                        isFirstPage =true;
+                      });
+                    }
 
 
-                },
-                child: Stack(
-                  children: <Widget>[
-                    PageView(
-                physics: NeverScrollableScrollPhysics(),
-                      controller: controller,
-                      scrollDirection: Axis.vertical,
-                      children: list,
-                    ),
+                  },
+                  child: Stack(
+                    children: <Widget>[
+                      PageView(
+                  physics: NeverScrollableScrollPhysics(),
+                        controller: controller,
+                        scrollDirection: Axis.vertical,
+                        children: list,
+                      ),
 //                    Container(
 //                      alignment: Alignment.bottomRight,
 //                      height: double.maxFinite,
@@ -124,11 +126,12 @@ class _FirstPageState extends State<FirstPage> {
 //                        ),
 //                      ),
 //                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
