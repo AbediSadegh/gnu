@@ -6,6 +6,8 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:gnu/ui/profile.dart';
 import 'package:gnu/ui/question.dart';
 
 import 'package:fl_chart/fl_chart.dart';
@@ -26,7 +28,6 @@ class _HomeState extends State<Home> {
       bottomNavigationBar: CurvedNavigationBar(
         color: Theme.of(context).primaryColor,
         backgroundColor: Colors.transparent,
-
         height: 55,
         items: <Widget>[
           Icon(
@@ -258,7 +259,7 @@ class HomeCard extends StatelessWidget {
                         ? Icon(
                             this.moodIcon,
                             color: Colors.white,
-                      size: 25.0,
+                            size: 25.0,
                           )
                         : Container(),
 //                    (, style: TextStyle(color: Colors.white),),
