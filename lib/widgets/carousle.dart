@@ -29,7 +29,8 @@ List<String> b = [
   'خوب',
   'عصبانی',
   'گیج',
-  'مضطرب','داغون',
+  'مضطرب',
+  'داغون',
 ];
 
 class _CarouselState extends State<Carousel> {
@@ -93,7 +94,7 @@ class _CarouselState extends State<Carousel> {
                     Text(
                       b[index],
                       style: TextStyle(
-                          fontSize: 20 + (1.00 - (page - index).abs() * 10)),
+                          fontSize: 16 + (1.00 - (page - index).abs() * 10)),
                     ),
                   ],
                 );
