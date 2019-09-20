@@ -78,9 +78,8 @@ class _SavePageState extends State<SavePage> {
               Expanded(
                 child: Container(),
               ),
-              GestureDetector(
-
-                onTap: () {
+              FlatButton(
+                onPressed: () {
                   widget.controller.nextPage(duration: Duration(milliseconds: 550), curve: Curves.linear);
                 },
                 child: Container(

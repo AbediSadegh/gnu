@@ -130,8 +130,8 @@ class _GnuSliderState extends State<GnuSlider> {
             Expanded(
               child: Container(),
             ),
-            GestureDetector(
-              onTap: widget.onTap,
+            FlatButton(
+              onPressed: widget.onTap,
               child: Container(
                 height: 55,
                 child: Opacity(
