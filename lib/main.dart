@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:gnu/ui/first_page/page_view.dart';
 import 'package:gnu/ui/home_page.dart';
 import 'package:gnu/widgets/home.dart';
@@ -8,6 +9,10 @@ void main() => runApp(Launcher());
 class Launcher extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
