@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:gnu/widgets/carousle.dart';
 
 class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();

@@ -1,6 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:gnu/entities/story.dart';
+import 'package:provider/provider.dart';
+import 'package:http/http.dart' as http;
 
 class SavePage extends StatefulWidget {
   @override
@@ -9,6 +12,8 @@ class SavePage extends StatefulWidget {
 
 class _SavePageState extends State<SavePage> {
   bool isSelected = false;
+
+  var _controller;
 
   @override
   void initState() {
@@ -26,22 +31,26 @@ class _SavePageState extends State<SavePage> {
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: SingleChildScrollView(
-        child:Container(
+        child: Container(
           height: MediaQuery.of(context).size.height,
           child: Column(
             children: <Widget>[
-              SizedBox(height: MediaQuery.of(context).size.height*.2),
+              SizedBox(height: MediaQuery.of(context).size.height * .2),
               Padding(
-                padding: const EdgeInsets.symmetric(horizontal:8.0),
-                child: Text("کارت خوب بود،مهدی میخوای یک اسم به امروزت بدی"
-                ,style: TextStyle(fontWeight: FontWeight.bold),
+                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                child: Text(
+                  "کارت خوب بود،مهدی میخوای یک اسم به امروزت بدی",
+                  style: TextStyle(fontWeight: FontWeight.bold),
                   textAlign: TextAlign.center,
                 ),
               ),
-              SizedBox(height: MediaQuery.of(context).size.height*.1,),
               SizedBox(
-                width: MediaQuery.of(context).size.width*.6,
+                height: MediaQuery.of(context).size.height * .1,
+              ),
+              SizedBox(
+                width: MediaQuery.of(context).size.width * .6,
                 child: TextField(
+                  controller: _controller,
                   style: TextStyle(color: Colors.white),
                   decoration: InputDecoration(
                     hintText: "افزودن عنوان",
@@ -49,18 +58,19 @@ class _SavePageState extends State<SavePage> {
                     enabledBorder: UnderlineInputBorder(
                         borderSide: BorderSide(color: Colors.white)),
                     focusedBorder: UnderlineInputBorder(
-                        borderSide: BorderSide(color: Colors.white.withOpacity(.3))),
+                        borderSide:
+                            BorderSide(color: Colors.white.withOpacity(.3))),
                   ),
                 ),
               ),
-
-            Expanded(
-              child:Container(),
-            ),
-
+              Expanded(
+                child: Container(),
+              ),
               GestureDetector(
-                onTap: (){
-//                  widget.controller.nextPage(duration: Duration(milliseconds: 550), curve: Curves.linear);
+                onTap: () {
+                  http.post('http://192.168.1.215:3000/api/story',
+                      body: Provider.of<Story>(context).toJson());
+                  Navigator.pop(context);
                 },
                 child: Container(
                   height: 55,
@@ -70,7 +80,9 @@ class _SavePageState extends State<SavePage> {
                         child: Center(
                           child: Text(
                             "ذخیره کن",
-                            style: TextStyle(color: Theme.of(context).primaryColor,fontSize: 20),
+                            style: TextStyle(
+                                color: Theme.of(context).primaryColor,
+                                fontSize: 20),
                           ),
                         ),
                         width: MediaQuery.of(context).size.width * .6,
@@ -83,8 +95,9 @@ class _SavePageState extends State<SavePage> {
                       duration: Duration(milliseconds: 600)),
                 ),
               ),
-              SizedBox(height: 25,)
-
+              SizedBox(
+                height: 25,
+              )
             ],
           ),
         ),
