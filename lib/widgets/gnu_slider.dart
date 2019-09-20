@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:gnu/entities/story.dart';
 import 'package:gnu/ui/home_page.dart';
+import 'package:provider/provider.dart';
 
 class GnuSlider extends StatefulWidget {
   final ValueChanged<int> onChange;
   final onTap;
 
-  GnuSlider({this.onChange,this.onTap});
+  GnuSlider({this.onChange, this.onTap});
 
   @override
   _GnuSliderState createState() => _GnuSliderState();
@@ -34,12 +36,19 @@ class _GnuSliderState extends State<GnuSlider> {
       crossAxisAlignment: CrossAxisAlignment.center,
       mainAxisAlignment: MainAxisAlignment.start,
       children: <Widget>[
-        SizedBox(height: 85,),
+        SizedBox(
+          height: 85,
+        ),
         Row(
-        mainAxisAlignment: MainAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            SizedBox(width: 15,),
-  Container(width: 0,), Text(
+            SizedBox(
+              width: 15,
+            ),
+            Container(
+              width: 0,
+            ),
+            Text(
               'روزت چطور بود؟',
               style: TextStyle(fontSize: 25.0),
             ),
@@ -65,6 +74,7 @@ class _GnuSliderState extends State<GnuSlider> {
               onChangeEnd: (i) {
                 setState(() {
                   _slider = _slider.toInt().toDouble();
+                  Provider.of<Story>(context).rate = _slider.toInt();
                 });
               },
 //          divisions: 4,
@@ -76,7 +86,7 @@ class _GnuSliderState extends State<GnuSlider> {
         ),
         Center(
           child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal:40.0),
+            padding: const EdgeInsets.symmetric(horizontal: 40.0),
             child: new Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               crossAxisAlignment: CrossAxisAlignment.center,
@@ -91,32 +101,37 @@ class _GnuSliderState extends State<GnuSlider> {
             ),
           ),
         ),
-        Expanded(child: Container(),),
+        Expanded(
+          child: Container(),
+        ),
         GestureDetector(
           onTap: widget.onTap,
           child: Container(
             height: 55,
             child: Opacity(
-                opacity: 1,
-                child: Container(
-                  child: Center(
-                    child: Text(
-                      "ادامه دادن",
-                      style: TextStyle(color: Theme.of(context).primaryColor,fontSize: 20),
-                    ),
+              opacity: 1,
+              child: Container(
+                child: Center(
+                  child: Text(
+                    "ادامه دادن",
+                    style: TextStyle(
+                        color: Theme.of(context).primaryColor, fontSize: 20),
                   ),
-                  width: MediaQuery.of(context).size.width * .6,
-                  height: 55,
-                  decoration: ShapeDecoration(
-                      color: Colors.white,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(45))),
                 ),
+                width: MediaQuery.of(context).size.width * .6,
+                height: 55,
+                decoration: ShapeDecoration(
+                    color: Colors.white,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(45))),
+              ),
 //                duration: Duration(milliseconds: 600)
-                ),
+            ),
           ),
         ),
-        SizedBox(height: 30,),
+        SizedBox(
+          height: 30,
+        ),
       ],
     );
   }

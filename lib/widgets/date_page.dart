@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:gnu/entities/story.dart';
 import 'package:intl/intl.dart';
-//  datetime_picker_formfield: ^0.4.3
+import 'package:provider/provider.dart';
+
 class DatePage extends StatefulWidget {
   final onTap;
 
@@ -46,7 +48,9 @@ class _DatePageState extends State<DatePage> {
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.start,
           children: <Widget>[
-            SizedBox(height: MediaQuery.of(context).size.height * .35,),
+            SizedBox(
+              height: MediaQuery.of(context).size.height * .35,
+            ),
             new Text(
               'بسیار خب نام یا شروع\n کنیم پایش جدید رو!',
               style: TextStyle(fontSize: 18),
@@ -57,10 +61,14 @@ class _DatePageState extends State<DatePage> {
             Stack(
               alignment: Alignment.bottomCenter,
               children: <Widget>[
-                Text("انتخاب زمان", style: TextStyle(fontSize: 65,color: Colors.white.withOpacity(.2),fontFamily: "Iranyekan"),),
-
+                Text(
+                  "انتخاب زمان",
+                  style: TextStyle(
+                      fontSize: 65,
+                      color: Colors.white.withOpacity(.2),
+                      fontFamily: "Iranyekan"),
+                ),
                 FlatButton(
-
                   onPressed: () {
                     Future<DateTime> time = showDatePicker(
                         context: context,
@@ -69,7 +77,9 @@ class _DatePageState extends State<DatePage> {
                         lastDate: DateTime(2070));
                     time.then((date) {
                       this.month = months[date.month];
-                      this.day = date.day + 1;
+                      this.day = date.day;
+                      Provider.of<Story>(context).day = date.day;
+                      Provider.of<Story>(context).month = date.month;
                     });
                   },
                   child: Text(
@@ -79,9 +89,7 @@ class _DatePageState extends State<DatePage> {
                 ),
               ],
             ),
-            Text(
-              "امروز"
-            ),
+            Text("امروز"),
             Expanded(
               child: Container(),
             ),
@@ -93,7 +101,8 @@ class _DatePageState extends State<DatePage> {
                   child: Center(
                     child: Text(
                       "ادامه دادن",
-                      style: TextStyle(color: Theme.of(context).primaryColor,fontSize: 20),
+                      style: TextStyle(
+                          color: Theme.of(context).primaryColor, fontSize: 20),
                     ),
                   ),
                   width: MediaQuery.of(context).size.width * .6,
@@ -105,8 +114,9 @@ class _DatePageState extends State<DatePage> {
                 ),
               ),
             ),
-            SizedBox(height: 25,),
-
+            SizedBox(
+              height: 25,
+            ),
           ],
         ),
       ]),
