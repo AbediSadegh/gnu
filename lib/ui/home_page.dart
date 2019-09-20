@@ -3,6 +3,9 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gnu/widgets/home.dart';
+import 'package:gnu/widgets/menu_screen.dart';
+import 'package:gnu/widgets/zoom_scaffold.dart';
+import 'package:hidden_drawer_menu/hidden_drawer/hidden_drawer_menu.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HomePage extends StatefulWidget {
@@ -11,6 +14,11 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  List<ScreenHiddenDrawer> itens = new List();
+
+  ScrollController _sc;
+  PageController _pc;
+  bool disableScroll = true;
   @override
   void initState() {
     // TODO: implement initState
@@ -18,14 +26,36 @@ class _HomePageState extends State<HomePage> {
     Timer(Duration(milliseconds: 750), () {
       _onButtonPressed();
     });
+    _sc = ScrollController();
+    _pc = PageController();
+    _sc.addListener(() {
+      if (_sc.offset >= 1.0) {
+        setState(() {
+          disableScroll = false;
+        });
+      } else {
+        setState(() {
+          disableScroll = true;
+        });
+      }
+    });
+
   }
 
   bool isFirst = true;
 
   @override
   Widget build(BuildContext context) {
-    return Home();
+    return ZoomScaffold(
+      menuScreen: MenuScreen(),
+      contentScreen:  Layout(
+          contentBuilder: (cc) => Container(
+              width: MediaQuery.of(context).size.width,
+              color: Theme.of(context).primaryColor,
+              child: Home())),
+    );
   }
+
 
   void _onButtonPressed() {
     showModalBottomSheet(
@@ -130,3 +160,6 @@ class _HomePageState extends State<HomePage> {
     name = await prefs.getString('name') ?? "";
   }
 }
+
+
+
