@@ -26,38 +26,39 @@ class _SavePageState extends State<SavePage> {
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: SingleChildScrollView(
-        child:Column(
-          children: <Widget>[
-            SizedBox(height: MediaQuery.of(context).size.height*.2),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal:8.0),
-              child: Text("لورم ایپسوم متن ساختگی با تولید سادگی نامفهوم از صنعت چاپ و با استفاده از طراحان گرافیک است. چاپگرها و متون بلکه روزنامه و مجله در ستون و سطرآنچنان که لازم است و برای شرایط فعلی تکنولوژی مورد نیاز و کاربردهای متنوع با هدف بهبود ابزارهای کاربردی می باشد. "
-              ,style: TextStyle(fontWeight: FontWeight.bold),
-                textAlign: TextAlign.center,
-              ),
-            ),
-            SizedBox(height: MediaQuery.of(context).size.height*.1,),
-            SizedBox(
-              width: MediaQuery.of(context).size.width*.6,
-              child: TextField(
-                decoration: InputDecoration(
-                  hintText: "وارد کردن عنوان",
-                  hintStyle: TextStyle(color: Colors.white),
-                  enabledBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white)),
-                  focusedBorder: UnderlineInputBorder(
-                      borderSide: BorderSide(color: Colors.white.withOpacity(.3))),
+        child:Container(
+          height: MediaQuery.of(context).size.height,
+          child: Column(
+            children: <Widget>[
+              SizedBox(height: MediaQuery.of(context).size.height*.2),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal:8.0),
+                child: Text("کارت خوب بود،مهدی میخوای یک اسم به امروزت بدی"
+                ,style: TextStyle(fontWeight: FontWeight.bold),
+                  textAlign: TextAlign.center,
                 ),
               ),
+              SizedBox(height: MediaQuery.of(context).size.height*.1,),
+              SizedBox(
+                width: MediaQuery.of(context).size.width*.6,
+                child: TextField(
+                  style: TextStyle(color: Colors.white),
+                  decoration: InputDecoration(
+                    hintText: "افزودن عنوان",
+                    hintStyle: TextStyle(color: Colors.white),
+                    enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white)),
+                    focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white.withOpacity(.3))),
+                  ),
+                ),
+              ),
+
+            Expanded(
+              child:Container(),
             ),
 
-//            Expanded(
-//              child:Container(),
-//            ),
-
-            Padding(
-              padding: const EdgeInsets.only(top:85.0),
-              child: GestureDetector(
+              GestureDetector(
                 onTap: (){
 //                  widget.controller.nextPage(duration: Duration(milliseconds: 550), curve: Curves.linear);
                 },
@@ -68,7 +69,7 @@ class _SavePageState extends State<SavePage> {
                       child: Container(
                         child: Center(
                           child: Text(
-                            "ادامه دادن",
+                            "ذخیره کن",
                             style: TextStyle(color: Theme.of(context).primaryColor,fontSize: 20),
                           ),
                         ),
@@ -82,9 +83,10 @@ class _SavePageState extends State<SavePage> {
                       duration: Duration(milliseconds: 600)),
                 ),
               ),
-            ),
+              SizedBox(height: 25,)
 
-          ],
+            ],
+          ),
         ),
       ),
     );

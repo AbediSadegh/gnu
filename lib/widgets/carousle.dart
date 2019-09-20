@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-
 class Carousel extends StatefulWidget {
   Carousel({Key key}) : super(key: key);
 
@@ -18,23 +17,19 @@ List<IconData> a = [
   FontAwesomeIcons.grinBeamSweat,
   FontAwesomeIcons.frown,
 
-
-
 //  FontAwesomeIcons.angry,
 //  FontAwesomeIcons.frown,
 //  FontAwesomeIcons.meh,
 //  FontAwesomeIcons.smile,
 ];
 List<String> b = [
-  'شاد و سرحال',
-  'شکر خوب بود',
-  'خوش شانس',
+  'سرحال',
+  'شکر',
+  'خوش‌شانس',
   'خوب',
-  'شلوغ و گیج کننده',
-  'استرس',
   'عصبانی',
-  'اظطراب',
-  'داغون',
+  'گیج',
+  'مضطرب','داغون',
 ];
 
 class _CarouselState extends State<Carousel> {
@@ -56,14 +51,21 @@ class _CarouselState extends State<Carousel> {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.start,
       children: <Widget>[
-        SizedBox(height: MediaQuery.of(context).size.height*.2,),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal:8.0),
-          child: Text("چه حسی داشتی در طول روز؟",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 20),),
+        SizedBox(
+          height: MediaQuery.of(context).size.height * .2,
         ),
-        Expanded(child: Container(),),
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+          child: Text(
+            "چه حسی داشتی در طول روز؟",
+            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+          ),
+        ),
+        Expanded(
+          child: Container(),
+        ),
         Container(
-          height: MediaQuery.of(context).size.height*.3,
+          height: MediaQuery.of(context).size.height * .3,
           child: NotificationListener<ScrollNotification>(
             onNotification: (notification) {
               if (notification is ScrollNotification) {
@@ -74,7 +76,6 @@ class _CarouselState extends State<Carousel> {
               return false;
             },
             child: PageView.builder(
-
               controller: controller,
               itemCount: a.length,
               itemBuilder: (BuildContext context, int index) {
@@ -82,7 +83,6 @@ class _CarouselState extends State<Carousel> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
-
                     Opacity(
                       opacity: 1.00 - (page - index).abs() / 3,
                       child: Icon(
@@ -101,7 +101,9 @@ class _CarouselState extends State<Carousel> {
             ),
           ),
         ),
-        SizedBox(height: MediaQuery.of(context).size.height*.3,),
+        SizedBox(
+          height: MediaQuery.of(context).size.height * .3,
+        ),
       ],
     );
   }
