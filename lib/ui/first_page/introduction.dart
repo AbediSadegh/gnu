@@ -7,7 +7,7 @@ class Introduction extends StatefulWidget {
   PageController controller;
   final onTap;
 
-  Introduction({this.controller,this.onTap});
+  Introduction({this.controller, this.onTap});
 
   @override
   _IntroductionState createState() => _IntroductionState();
@@ -19,30 +19,29 @@ class _IntroductionState extends State<Introduction> {
   bool isStartSecond = false;
   bool isButtonShow = false;
 
-
-
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
 
-    Timer(Duration(milliseconds: 500),(){
+    Timer(Duration(milliseconds: 500), () {
       setState(() {
         isStartFirst = true;
       });
     });
-    Timer(Duration(milliseconds: 950),(){
+    Timer(Duration(milliseconds: 950), () {
       setState(() {
         isStartSecond = true;
       });
     });
 
-    Timer(Duration(milliseconds: 1250),(){
+    Timer(Duration(milliseconds: 1250), () {
       setState(() {
         isButtonShow = true;
       });
     });
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -54,7 +53,9 @@ class _IntroductionState extends State<Introduction> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
-            Container(height: MediaQuery.of(context).size.height*.35,),
+            Container(
+              height: MediaQuery.of(context).size.height * .35,
+            ),
             AnimatedOpacity(
               opacity: isStartFirst ? 1 : 0,
               curve: Curves.easeInOut,
@@ -63,16 +64,25 @@ class _IntroductionState extends State<Introduction> {
                 children: <Widget>[
                   Text(
                     "سلام عزیزم،",
-                    style: TextStyle(fontSize: 28, color: Colors.white,fontWeight: FontWeight.bold,fontFamily: "Iranyekan"),
+                    style: TextStyle(
+                        fontSize: 28,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontFamily: "Iranyekan"),
                   ),
                   Text(
                     "من iCare هستم",
-                    style: TextStyle(fontSize: 28, color: Colors.white,fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                        fontSize: 28,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold),
                   ),
                 ],
               ),
             ),
-            SizedBox(height: 15,),
+            SizedBox(
+              height: 15,
+            ),
             AnimatedOpacity(
               opacity: isStartSecond ? 1 : 0,
               curve: Curves.easeInOut,
@@ -80,17 +90,19 @@ class _IntroductionState extends State<Introduction> {
               child: Column(
                 children: <Widget>[
                   Text(
-                    "دستیار جدید",
+                    "دستیار شخصی",
                     style: TextStyle(fontSize: 20, color: Colors.white),
                   ),
                   Text(
-                    "شخصی شما",
+                    "جدید شما",
                     style: TextStyle(fontSize: 20, color: Colors.white),
                   ),
                 ],
               ),
             ),
-            Expanded(child: Container(),),
+            Expanded(
+              child: Container(),
+            ),
             AnimatedOpacity(
               duration: Duration(milliseconds: 900),
               opacity: isButtonShow ? 1 : 0,
@@ -132,7 +144,9 @@ class _IntroductionState extends State<Introduction> {
                 ),
               ),
             ),
-            Container(height: 120,),
+            Container(
+              height: 120,
+            ),
           ],
         ),
       ),

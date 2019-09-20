@@ -1,23 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gnu/widgets/carousle.dart';
 
-class MyApppp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: Scaffold(
-          body: Padding(
-        padding: const EdgeInsets.only(top: 59),
-        child: Carousel(),
-      )),
-    );
-  }
-}
-
 class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
