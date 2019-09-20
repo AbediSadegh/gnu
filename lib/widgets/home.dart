@@ -17,13 +17,14 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xfff4f4f4),
         bottomNavigationBar: CurvedNavigationBar(
           color: Theme.of(context).primaryColor,
-          backgroundColor: Colors.transparent,
+          backgroundColor: Colors.transparent,height: 55,
           items: <Widget>[
-            Icon(Icons.home),
-            Icon(Icons.show_chart),
-            Icon(Icons.person)
+            Icon(Icons.home,size: 36,),
+            Icon(Icons.show_chart,size: 36,),
+            Icon(Icons.person,size: 36,)
           ],
           onTap: (i) {
             setState(() {
@@ -84,7 +85,7 @@ class _HomeState extends State<Home> {
               ],
             ),
           ),
-        )
+        ))
       : (_page == 1)
                 ? Padding(
                     padding: EdgeInsets.all(6),
@@ -92,7 +93,7 @@ class _HomeState extends State<Home> {
                       children: [LineChartSample2(), LineChartSample2()],
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                     ))
-                : Container()),
+                : Container(),
     );
   }
 }

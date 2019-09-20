@@ -90,9 +90,6 @@ class _IntroductionState extends State<Introduction> {
                 ],
               ),
             ),
-            SizedBox(
-              height: 80,
-            ),
             Expanded(child: Container(),),
             AnimatedOpacity(
               duration: Duration(milliseconds: 900),

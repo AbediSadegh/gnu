@@ -99,17 +99,15 @@ class _QuestionPageState extends State<QuestionPage> {
                           children: <Widget>[
                             GestureDetector(
                                 onTap: () {
-                                  if (controller.page == 1.0) {
-                                    setState(() {
-                                      isFirstPage = true;
-                                    });
-                                  }
-
                                   if (controller.page > 0)
                                     controller.previousPage(
                                         duration: Duration(milliseconds: 950),
                                         curve: Curves.linear);
-
+                                  if (controller.page -1  == 0.0) {
+                                    setState(() {
+                                      isFirstPage = true;
+                                    });
+                                  }
                                 },
                                 child: Icon(
                                   Icons.keyboard_arrow_up,
@@ -117,17 +115,15 @@ class _QuestionPageState extends State<QuestionPage> {
                                 )),
                             GestureDetector(
                               onTap: () {
-                                if (controller.page == 2.0) {
+                                if (controller.page < list.length){
+                                  controller.nextPage(
+                                      duration: Duration(milliseconds: 950),
+                                      curve: Curves.linear);}
+                                if (controller.page+1 == 1.0) {
                                   setState(() {
                                     isFirstPage = false;
                                   });
                                 }
-                                if (controller.page < list.length) {
-                                  controller.nextPage(
-                                      duration: Duration(milliseconds: 950),
-                                      curve: Curves.linear);
-                                }
-
                               },
                               child: Icon(
                                 Icons.keyboard_arrow_down,
