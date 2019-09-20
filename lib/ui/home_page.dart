@@ -83,7 +83,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   Column _buildBottomNavigation() {
-    String str2 = ' من خیلی هیجان زده‌ام برای شروع این ماجرا کنار هم، ${Provider.of<Name>(context).name}';
+    String str2 = 'من خیلی هیجان زده‌ام برای شروع این ماجرا کنار هم${"، "+Provider.of<Name>(context).name ?? "، محمد"}';
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,
       children: <Widget>[
