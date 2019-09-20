@@ -82,8 +82,6 @@ class _NamePageState extends State<NamePage> {
                         //todo ذخیره در sharePrefrences
                         print(text);
                         _saveName(text);
-                        Navigator.of(context).pushReplacement(
-                            MaterialPageRoute(builder: (context) => HomePage()));
                       },
 //                    autofocus: true,
                       cursorColor: Colors.white,
