@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:gnu/entities/story.dart';
+import 'package:gnu/ui/advertise_page2.dart';
 import 'package:gnu/ui/first_page/reason.dart';
 import 'package:gnu/ui/save_page.dart';
 import 'package:gnu/widgets/carousle.dart';
@@ -49,7 +50,7 @@ class _QuestionPageState extends State<QuestionPage> {
       ReasonPage(controller, mood),
       Carousel(pageController: controller,),
       SavePage(controller),
-      AdvertisePage(),
+      AdvertisePage2(),
     ];
     return Directionality(
       textDirection: TextDirection.rtl,

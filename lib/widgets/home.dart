@@ -100,7 +100,12 @@ class _HomeState extends State<Home> {
                     SizedBox(
                       height: 10,
                     ),
-                    BarChartSample1()
+                    BarChartSample1(),
+                    Container(height: 15,),
+                    Container(child: ClipRRect(
+                        borderRadius: BorderRadius.circular(15),
+                        child: Image(image: AssetImage("asset/photo-4.jpg"),))),
+                    Container(height: 15,),
                   ],
                 ),
               )

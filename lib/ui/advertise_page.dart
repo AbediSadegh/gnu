@@ -9,10 +9,8 @@ class AdvertisePage extends StatelessWidget {
         context,
 //          color0: Colors.transparent,
 //          color1: Colors.black,
-        child: FadeInImage.assetNetwork(
-          placeholder: 'asset/load.gif',
-          image:
-          'https://bucket-15.digicloud-oss.com/digikala-adservice-banners/1000009960.jpg',
+        child: Image.asset(
+          'asset/1000009960.jpg',
           fit: BoxFit.cover,
           width: 5.0,
           height: 5.0,
@@ -23,10 +21,8 @@ class AdvertisePage extends StatelessWidget {
         context,
 //          color0: Colors.transparent,
 //          color1: Colors.black,
-        child: FadeInImage.assetNetwork(
-          placeholder: 'asset/load.gif',
-          image:
-          'https://bucket-15.digicloud-oss.com/digikala-adservice-banners/1000009932.jpg',
+        child: Image.asset(
+          'asset/photo-4.jpg',
           fit: BoxFit.cover,
           width: 5.0,
           height: 5.0,
@@ -37,10 +33,8 @@ class AdvertisePage extends StatelessWidget {
         context,
 //          color0: Colors.transparent,
 //          color1: Colors.black,
-        child: FadeInImage.assetNetwork(
-          placeholder: 'asset/load.gif',
-          image:
-          'https://bucket-15.digicloud-oss.com/digikala-adservice-banners/1000010142.jpg',
+        child:Image.asset(
+          'asset/photo-5.jpg',
           fit: BoxFit.cover,
           width: 5.0,
           height: 5.0,
@@ -51,10 +45,8 @@ class AdvertisePage extends StatelessWidget {
         context,
 //          color0: Colors.transparent,
 //          color1: Colors.black,
-        child: FadeInImage.assetNetwork(
-          placeholder: 'asset/load.gif',
-          image:
-          'https://cdn.tabnak.ir/files/fa/news/1395/11/17/685764_117.jpg',
+        child: Image.asset(
+          'asset/photo-6.jpg',
           fit: BoxFit.cover,
           width: 5.0,
           height: 5.0,
@@ -65,10 +57,8 @@ class AdvertisePage extends StatelessWidget {
         context,
 //          color0: Colors.transparent,
 //          color1: Colors.black,
-        child: FadeInImage.assetNetwork(
-          placeholder: 'asset/load.gif',
-          image:
-          'https://images.kojaro.com/2019/5/822b235e-739b-4137-aea0-9a90d23844c6.jpg',
+        child: Image.asset(
+          'asset/photo-7.jpg',
           fit: BoxFit.cover,
           width: 5.0,
           height: 5.0,
@@ -79,10 +69,8 @@ class AdvertisePage extends StatelessWidget {
         context,
 //          color0: Colors.transparent,
 //          color1: Colors.black,
-        child: FadeInImage.assetNetwork(
-          placeholder: 'asset/load.gif',
-          image:
-          'https://bucket-15.digicloud-oss.com/digikala-adservice-banners/1000005424.jpg',
+        child: Image.asset(
+          'asset/photo-8.jpg',
           fit: BoxFit.cover,
           width: 5.0,
           height: 5.0,
@@ -93,10 +81,8 @@ class AdvertisePage extends StatelessWidget {
         context,
 //          color0: Colors.transparent,
 //          color1: Colors.black,
-        child: FadeInImage.assetNetwork(
-          placeholder: 'asset/load.gif',
-          image:
-          'https://bucket-15.digicloud-oss.com/digikala-adservice-banners/1000009690.jpg',
+        child: Image.asset(
+          'asset/photo-9.jpg',
           fit: BoxFit.cover,
           width: 5.0,
           height: 5.0,
@@ -107,10 +93,8 @@ class AdvertisePage extends StatelessWidget {
         context,
 //          color0: Colors.transparent,
 //          color1: Colors.black,
-        child: FadeInImage.assetNetwork(
-          placeholder: 'asset/load.gif',
-          image:
-          'https://cdn.cinematicket.org/images/a-d/slider/ideaSlider.jpg',
+        child: Image.asset(
+          'asset/photo-9.jpg',
           fit: BoxFit.cover,
           width: 5.0,
           height: 5.0,
@@ -124,9 +108,11 @@ class AdvertisePage extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Column(
+
           children: <Widget>[
+          SizedBox(height: 120,),
             Container(
-              height: 110,
+              height: 100,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment:MainAxisAlignment.center,
